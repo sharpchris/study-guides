@@ -164,6 +164,9 @@
 
   /* Check your understanding */
   #check { padding-bottom: 4rem; }
+  .check-group h3 { font-family: var(--display); font-weight: 700; font-size: 1.6rem; line-height: 1.15; margin: 1.5rem 0 0.25rem; }
+  .check-group > p { color: var(--muted); font-size: 0.95rem; margin: 0 0 0.9rem; }
+  .cq .cq-tag { display: block; font-size: 0.8rem; color: var(--muted); font-weight: 700; margin-bottom: 0.1rem; }
   .cq { border: 1.5px solid var(--line); background: var(--surface); border-radius: 0.9rem; margin: 0 0 0.75rem; }
   .cq summary { cursor: pointer; padding: 1rem 1.2rem; font-weight: 700; list-style: none; display: flex; gap: 0.75rem; }
   .cq summary::-webkit-details-marker { display: none; }
@@ -382,7 +385,7 @@
 
   <section id="check" aria-labelledby="check-h">
     <h2 id="check-h"><span class="num">4</span>Check your understanding</h2>
-    <p class="lede">These match the review questions at the end of the lesson. Answer each one in your head or on paper first, then open the key points to check yourself.</p>
+    <p class="lede">These are the questions from the textbook: the checkpoint and picture questions you see while reading, then the review questions at the end of the lesson. Answer each one in your head or on paper first, then open the key points to check yourself.</p>
     <div id="check-list"></div>
   </section>
 
@@ -513,7 +516,70 @@ const QUESTIONS = [
     why: "Because of The Prince, “Machiavellian” came to mean using deceit in politics." }
 ];
 
-const CHECK = [
+const CHECK_READ = [
+  { tag: "Describe",
+    q: "What were some important characteristics of the Renaissance?",
+    points: [
+      "Renewed interest in the learning of ancient Greece and Rome",
+      "Humanism and a focus on secular, worldly life here and now",
+      "Emphasis on individual achievement; the ideal person had talents in many fields",
+      "A spirit of adventure and curiosity: explorers sailed uncharted seas and scientists studied the universe in new ways",
+      "Great creativity and change, especially in culture"
+    ] },
+  { tag: "Map: Italy’s City-States and Sea Trade",
+    q: "Why were so many banking centers located in Italy?",
+    points: [
+      "Italy sat in the middle of the Mediterranean, at the center of Europe’s sea trade",
+      "Trade made Italy’s city-states, like Florence, Venice, and Genoa, very wealthy",
+      "Merchants trading across the sea needed banks to store money, make loans, and exchange currencies",
+      "Example: the Medici built a banking business in Florence that made them rich and powerful"
+    ] },
+  { tag: "Identify cause and effect",
+    q: "Why did Italy’s historic legacy make it an ideal place for the Renaissance to begin?",
+    points: [
+      "Italy had been the center of ancient Roman civilization",
+      "The Renaissance was a reawakened interest in Roman culture, so it made sense for it to start there",
+      "Roman ruins, statues, coins, and inscriptions were everyday reminders of Rome’s glory",
+      "Also helpful: rich city-states and trade with the Muslim world, which had preserved ancient texts"
+    ] },
+  { tag: "Picture: The Last Supper",
+    q: "What techniques bring the viewer’s eye to the central figure of Jesus in The Last Supper?",
+    points: [
+      "Perspective: the lines of the ceiling, walls, and table all point toward Jesus’s head, the vanishing point",
+      "Jesus sits in the exact center of the painting",
+      "The bright window behind him frames his head and makes him stand out",
+      "The disciples are grouped on both sides, with space left around Jesus"
+    ] },
+  { tag: "Identify",
+    q: "Which artistic technique was developed during the Renaissance and used in The Last Supper?",
+    points: [
+      "Perspective",
+      "It shows a three-dimensional world on a flat surface by making faraway objects smaller, which creates depth"
+    ] },
+  { tag: "Picture: School of Athens",
+    q: "Why did Raphael include Renaissance artists in School of Athens?",
+    points: [
+      "To show Renaissance artists as equals of the great thinkers of ancient Greece",
+      "It connects the Renaissance to the classical past, the “rebirth” of ancient learning",
+      "It celebrates individual achievement, a key Renaissance value (he even included himself)"
+    ] },
+  { tag: "Picture: The Court of Mantua",
+    q: "Would Machiavelli have considered The Court of Mantua painting realistic or not? Why?",
+    points: [
+      "There isn’t one right answer. What matters is explaining your reasoning with what you know about Machiavelli",
+      "Probably not realistic: a nobleman paid for it, so it shows him and his court in a grand, flattering way. Machiavelli wanted to show power and rulers as they really are, not as an ideal",
+      "Or realistic in a way: the people are painted with realistic detail, and Machiavelli knew rulers use their image to hold power, which is exactly what this painting does"
+    ] },
+  { tag: "Identify",
+    q: "How did Renaissance writings express realism?",
+    points: [
+      "Machiavelli’s The Prince looked at how real rulers actually gained and kept power, not how ideal rulers should act (as Plato had written)",
+      "He based it on his own experience as a diplomat and on Roman history",
+      "Handbooks like Castiglione’s The Book of the Courtier gave practical, how-to advice for succeeding in real Renaissance courts"
+    ] }
+];
+
+const CHECK_END = [
   { q: "What were some of the characteristics of the Italian Renaissance?",
     points: [
       "Great creativity and change in economics, politics, society, and especially culture",
@@ -782,16 +848,26 @@ function showResults(correct, total, missed) {
 /* ---------- Check your understanding ---------- */
 function renderCheck() {
   const box = $("#check-list");
-  CHECK.forEach((c, i) => {
+  addCheckGroup(box, "While you read", "Checkpoint questions and picture questions from inside the lesson, in the order they appear.", CHECK_READ);
+  addCheckGroup(box, "End of lesson", "The Assessment questions from the last page of the lesson.", CHECK_END);
+}
+function addCheckGroup(box, title, blurb, list) {
+  const g = el("div", "check-group");
+  g.append(el("h3", null, title), el("p", null, blurb));
+  list.forEach((c, i) => {
     const d = el("details", "cq");
     const s = el("summary");
-    s.append(el("span", "cq-n", (i + 1) + "."), el("span", null, c.q));
+    const qtext = el("span");
+    if (c.tag) qtext.append(el("span", "cq-tag", c.tag));
+    qtext.append(document.createTextNode(c.q));
+    s.append(el("span", "cq-n", (i + 1) + "."), qtext);
     d.append(s);
     const ul = el("ul");
     c.points.forEach((p) => ul.append(el("li", null, p)));
     d.append(ul);
-    box.append(d);
+    g.append(d);
   });
+  box.append(g);
 }
 
 /* ---------- Start ---------- */

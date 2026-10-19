@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Italian Renaissance: Study Guide &amp; Vocabulary Quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ECEEF2;
+    --surface: #FFFFFF;
+    --ink: #1E2433;
+    --muted: #586074;
+    --line: #CDD2DC;
+    --lapis: #2B4C9B;
+    --lapis-soft: #DFE6F5;
+    --ochre: #D9A441;
+    --good: #2E7D4F;
+    --good-soft: #DDEFE3;
+    --bad: #B02A4A;
+    --bad-soft: #F7DFE5;
+    --display: "Cormorant Garamond", Garamond, "Times New Roman", serif;
+    --body: "Atkinson Hyperlegible", Verdana, "Segoe UI", system-ui, sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12161F; --surface: #1B2130; --ink: #E6E9F0; --muted: #A2AABB; --line: #323B4F;
+      --lapis: #8FA9E8; --lapis-soft: #22305A; --ochre: #E2B457;
+      --good: #62C48E; --good-soft: #1B3F2E; --bad: #F27C97; --bad-soft: #43202A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12161F; --surface: #1B2130; --ink: #E6E9F0; --muted: #A2AABB; --line: #323B4F;
+    --lapis: #8FA9E8; --lapis-soft: #22305A; --ochre: #E2B457;
+    --good: #62C48E; --good-soft: #1B3F2E; --bad: #F27C97; --bad-soft: #43202A;
+  }
+  html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 5rem); }
+  *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 1.0625rem/1.6 var(--body); }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; }
+
+  /* Hero */
+  .hero { padding: 3.25rem 0 2rem; display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: end; }
+  .hero h1 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(2.6rem, 8vw, 4.2rem); line-height: 0.95; letter-spacing: -0.01em;
+    margin: 0 0 1rem;
+  }
+  .hero h1 small { display: block; font-family: var(--body); font-weight: 700; font-size: 0.95rem; letter-spacing: 0; color: var(--muted); margin-bottom: 0.6rem; }
+  .hero p { margin: 0; color: var(--muted); max-width: 32rem; }
+  .dome { width: 8.5rem; height: auto; color: var(--lapis); }
+  @media (max-width: 34rem) {
+    .hero { grid-template-columns: 1fr; padding-top: 2.25rem; }
+    .dome { width: 5.5rem; order: -1; }
+  }
+  .steps { list-style: none; margin: 0 0 1rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+  .steps a { color: var(--ink); font-weight: 700; text-decoration-color: var(--lapis); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+  section { padding: 2.5rem 0 1.5rem; border-top: 1px solid var(--line); }
+  h2 {
+    font-family: var(--display); font-weight: 700; font-size: 2.2rem; line-height: 1.1;
+    margin: 0 0 0.4rem; display: flex; gap: 0.75rem; align-items: center;
+  }
+  .num {
+    flex: none; width: 2rem; height: 2rem; border-radius: 50%;
+    display: inline-grid; place-items: center;
+    background: var(--lapis); color: var(--surface);
+    font: 700 1rem var(--body);
+  }
+  .lede { color: var(--muted); margin: 0 0 1.25rem; }
+
+  .btn {
+    font: 700 1rem var(--body); padding: 0.7rem 1.3rem; border-radius: 999px;
+    border: 2px solid var(--ink); background: var(--ink); color: var(--bg); cursor: pointer;
+  }
+  .btn.secondary { background: transparent; color: var(--ink); }
+  .btn:hover { filter: brightness(1.12); }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+  :focus-visible { outline: 3px solid var(--ochre); outline-offset: 3px; }
+
+  /* Outline */
+  .outline h3 {
+    font-family: var(--display); font-weight: 700; font-size: 1.6rem; line-height: 1.15;
+    margin: 2rem 0 0.6rem; display: flex; gap: 0.6rem; align-items: baseline;
+  }
+  .outline h3:first-child { margin-top: 0.5rem; }
+  .outline h3 .roman { color: var(--lapis); min-width: 2.2rem; }
+  .outline ul { margin: 0; padding-left: 1.3rem; }
+  .outline > ul { padding-left: 2.8rem; }
+  .outline li { margin: 0.35rem 0; }
+  .outline li > ul { margin-top: 0.25rem; }
+  .outline li li { color: var(--ink); }
+  .outline strong { color: var(--lapis); }
+  @media (max-width: 34rem) { .outline > ul { padding-left: 1.3rem; } }
+
+  /* Flashcards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+  .card { perspective: 900px; border: 0; padding: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; border-radius: 0.8rem; }
+  .card-inner { display: grid; min-height: 9.5rem; transition: transform 0.45s ease; transform-style: preserve-3d; }
+  .card.flipped .card-inner { transform: rotateY(180deg); }
+  .face {
+    grid-area: 1 / 1; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    border: 1px solid var(--line); border-radius: 0.8rem; background: var(--surface);
+    padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; gap: 0.5rem;
+  }
+  .face.back { transform: rotateY(180deg); background: var(--lapis-soft); border-color: var(--lapis); font-size: 0.95rem; line-height: 1.45; }
+  .card .term { font-family: var(--display); font-weight: 700; font-size: 1.55rem; line-height: 1.05; }
+  .card .hint { font-size: 0.8rem; color: var(--muted); }
+  @media (prefers-reduced-motion: reduce) { .card-inner { transition: none; } }
+
+  /* Quiz */
+  .progress { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding: 0.75rem 0; margin-bottom: 0.5rem; }
+  .progress-text { font-size: 0.9rem; font-weight: 700; color: var(--muted); }
+  .bar { height: 0.45rem; border-radius: 999px; background: var(--line); overflow: hidden; margin-top: 0.35rem; }
+  .bar span { display: block; height: 100%; width: 0; background: var(--lapis); transition: width 0.25s; }
+
+  fieldset.q { border: 1.5px solid var(--line); background: var(--surface); border-radius: 0.9rem; padding: 1.1rem 1.2rem 1.2rem; margin: 0 0 1rem; min-width: 0; }
+  fieldset.q legend { float: left; width: 100%; padding: 0; margin: 0 0 0.8rem; }
+  .qnum { display: block; font-size: 0.85rem; font-weight: 700; color: var(--muted); }
+  .prompt { display: block; font-size: 1.1rem; line-height: 1.5; }
+  .opts { clear: both; display: grid; gap: 0.5rem; }
+  .opt { display: flex; gap: 0.7rem; align-items: center; padding: 0.65rem 0.85rem; border: 1.5px solid var(--line); border-radius: 0.6rem; cursor: pointer; }
+  .opt:hover { border-color: var(--lapis); }
+  .opt input { accent-color: var(--lapis); width: 1.15rem; height: 1.15rem; margin: 0; flex: none; }
+  .opt:has(input:checked) { border-color: var(--lapis); background: var(--lapis-soft); }
+  .opt:has(input:focus-visible) { outline: 3px solid var(--ochre); outline-offset: 2px; }
+  .opt .tag { margin-left: auto; font-size: 0.8rem; font-weight: 700; white-space: nowrap; }
+
+  fieldset.q.missing { border-color: var(--ochre); }
+  fieldset.q.graded .opt { cursor: default; }
+  fieldset.q.graded .opt:hover { border-color: var(--line); }
+  fieldset.q.graded .opt:has(input:checked) { background: transparent; border-color: var(--line); }
+  fieldset.q.is-right { border-color: var(--good); border-left-width: 6px; }
+  fieldset.q.is-wrong { border-color: var(--bad); border-left-width: 6px; }
+  fieldset.q.graded .opt.is-answer { border-color: var(--good); background: var(--good-soft); }
+  fieldset.q.graded .opt.is-answer .tag { color: var(--good); }
+  fieldset.q.graded .opt.is-wrong-pick { border-color: var(--bad); background: var(--bad-soft); }
+  fieldset.q.graded .opt.is-wrong-pick .tag { color: var(--bad); }
+
+  .feedback { margin-top: 0.9rem; padding: 0.8rem 1rem; border-radius: 0.6rem; font-size: 0.97rem; line-height: 1.5; }
+  .feedback strong { display: block; margin-bottom: 0.15rem; }
+  .feedback.good { background: var(--good-soft); }
+  .feedback.good strong { color: var(--good); }
+  .feedback.bad { background: var(--bad-soft); }
+  .feedback.bad strong { color: var(--bad); }
+
+  .submit-area { margin: 1.5rem 0 1rem; }
+  .note { margin-top: 0.9rem; padding: 0.9rem 1rem; border: 1.5px solid var(--ochre); border-radius: 0.6rem; background: var(--surface); }
+  .note p { margin: 0 0 0.75rem; }
+
+  .results { background: var(--surface); border: 2px solid var(--lapis); border-radius: 1rem; padding: 1.4rem 1.5rem; margin: 0.5rem 0 1.5rem; }
+  .score-line { display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; }
+  .score-big { font-family: var(--display); font-weight: 700; font-size: 3.4rem; line-height: 1; }
+  .score-pct { font-weight: 700; color: var(--muted); }
+  .results p { margin: 0.75rem 0; }
+  .missed { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1rem; padding: 0; list-style: none; }
+  .missed button { font: 700 0.9rem var(--body); color: var(--bad); background: var(--bad-soft); border: 0; border-radius: 999px; padding: 0.35rem 0.8rem; cursor: pointer; }
+
+  /* Check your understanding */
+  #check { padding-bottom: 4rem; }
+  .cq { border: 1.5px solid var(--line); background: var(--surface); border-radius: 0.9rem; margin: 0 0 0.75rem; }
+  .cq summary { cursor: pointer; padding: 1rem 1.2rem; font-weight: 700; list-style: none; display: flex; gap: 0.75rem; }
+  .cq summary::-webkit-details-marker { display: none; }
+  .cq summary::after { content: "Show key points"; margin-left: auto; flex: none; font-size: 0.85rem; color: var(--lapis); padding-top: 0.15rem; }
+  .cq[open] summary::after { content: "Hide"; }
+  .cq .cq-n { color: var(--lapis); flex: none; }
+  .cq ul { margin: 0; padding: 0 1.2rem 1.1rem 2.6rem; }
+  .cq li { margin: 0.3rem 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div>
+      <h1><small>Topic 5.1 study guide</small>The Italian Renaissance</h1>
+      <p>Read the outline, flip through the vocabulary cards, take the quiz, then test yourself on the big questions from the end of the lesson.</p>
+    </div>
+    <svg class="dome" viewBox="0 0 120 120" aria-hidden="true" fill="currentColor">
+      <rect x="56" y="6" width="8" height="10" rx="1"/>
+      <rect x="52" y="16" width="16" height="12" rx="1.5"/>
+      <path d="M18 86 C18 52 36 30 60 28 C84 30 102 52 102 86 Z"/>
+      <rect x="12" y="86" width="96" height="8" rx="1.5"/>
+      <rect x="16" y="96" width="88" height="18" rx="1.5" opacity="0.55"/>
+      <g stroke="var(--bg)" stroke-width="2.2" fill="none">
+        <path d="M60 30 L60 86"/>
+        <path d="M45 36 C38 52 36 70 36 86"/>
+        <path d="M75 36 C82 52 84 70 84 86"/>
+      </g>
+    </svg>
+  </header>
+
+  <nav aria-label="Sections">
+    <ol class="steps">
+      <li><a href="#outline">1. Study outline</a></li>
+      <li><a href="#review">2. Vocabulary cards</a></li>
+      <li><a href="#quiz">3. Vocabulary quiz</a></li>
+      <li><a href="#check">4. Check your understanding</a></li>
+    </ol>
+  </nav>
+
+  <section id="outline" aria-labelledby="outline-h">
+    <h2 id="outline-h"><span class="num">1</span>Study outline</h2>
+    <p class="lede">The main ideas of the lesson, in order. Vocabulary words are highlighted.</p>
+
+    <div class="outline">
+      <h3><span class="roman">I.</span>What was the Renaissance?</h3>
+      <ul>
+        <li>The <strong>Renaissance</strong> was a golden age in the arts and learning in Western Europe from the 1300s to the 1500s. The word means “rebirth.”
+          <ul>
+            <li>It brought big changes in economics, politics, and society, and above all in culture.</li>
+            <li>It was the bridge between medieval times and early modern times.</li>
+            <li>Growing cities and trade opened up people’s view of the world.</li>
+          </ul>
+        </li>
+        <li>A new worldview
+          <ul>
+            <li>Through contact with Spain and Sicily, Christian scholars studied Muslim philosophy, art, and science. Muslim scholars also passed along knowledge of ancient Greece and Rome.</li>
+            <li>Renewed interest in Greek and Roman learning inspired people to remake their own age. They saw it as a rebirth after the disorder of the Middle Ages.</li>
+            <li>It wasn’t a total break from the past: Latin and ancient thinkers like Euclid and Aristotle had survived the Middle Ages.</li>
+            <li>The big shift: medieval scholars focused on life after death, while Renaissance thinkers wanted to explore life here and now.</li>
+            <li>New emphasis on individual achievement. The Renaissance ideal was a person talented in many different fields.</li>
+          </ul>
+        </li>
+        <li>A spirit of adventure and curiosity
+          <ul>
+            <li>Navigators explored unknown seas, and scientists studied the universe in new ways.</li>
+            <li>Italian thinker <strong>Pico della Mirandola</strong> expressed this confidence in human ability: people can become whatever they choose.</li>
+          </ul>
+        </li>
+        <li><strong>Humanism</strong>: the intellectual movement at the heart of the Renaissance
+          <ul>
+            <li>Humanists studied classical Greek and Roman cultures to better understand their own times.</li>
+            <li>Most were devout Christians, but they focused on <strong>secular</strong> (worldly) subjects instead of religious ones.</li>
+            <li>They believed education should build a person’s creativity, and stressed the <strong>humanities</strong>: grammar, <strong>rhetoric</strong> (using language effectively), poetry, and history.</li>
+          </ul>
+        </li>
+        <li><strong>Francesco Petrarch</strong>, an early humanist from Florence (1300s)
+          <ul>
+            <li>Tracked down old Greek and Roman manuscripts in monasteries and churches, which helped bring back works by Cicero, Homer, Virgil, and Livy.</li>
+            <li>Wrote love poems, the <em>Sonnets to Laura</em>, that influenced other writers.</li>
+            <li>Wrote in the <strong>vernacular</strong> (the everyday language of ordinary people) as well as in Latin.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3><span class="roman">II.</span>Why the Renaissance began in Italy</h3>
+      <ul>
+        <li>It began in Italy in the mid-1300s, spread north to the rest of Europe, and peaked in the 1500s.</li>
+        <li>History and geography
+          <ul>
+            <li>Italy had been the center of ancient Rome. Ruins, statues, coins, and inscriptions were everyday reminders of Rome’s glory.</li>
+          </ul>
+        </li>
+        <li>Thriving cities
+          <ul>
+            <li>Northern <strong>city-states</strong> like Florence, Milan, Venice, and Genoa had grown rich from trade and manufacturing during the Middle Ages. Rome and Naples also contributed.</li>
+          </ul>
+        </li>
+        <li>Trade with the Muslim world
+          <ul>
+            <li>Ships brought goods, people, and ideas to Italy’s ports. The Muslim world had preserved Greek and Roman learning, so many lost texts were recovered this way.</li>
+          </ul>
+        </li>
+        <li>A wealthy merchant class
+          <ul>
+            <li>Rich merchants held political and economic power, valued individual achievement, and spent heavily on the arts.</li>
+          </ul>
+        </li>
+        <li><strong>Florence</strong> and the <strong>Medici</strong>
+          <ul>
+            <li>Florence became the symbol of the Renaissance, producing many poets, artists, architects, scholars, and scientists in a short time, much like ancient Athens.</li>
+            <li>The Medici family built a banking business in the 1400s, then expanded into manufacturing and mining. Their money became political and cultural power.</li>
+            <li>Cosimo de’ Medici took control of Florence’s government in 1434, and the family ruled the city for years without a crown.</li>
+            <li><strong>Lorenzo de’ Medici</strong> (“the Magnificent”), Cosimo’s grandson, was a skilled politician and a generous <strong>patron</strong> (financial supporter) of the arts. Artists practiced by sketching Roman statues in the Medici gardens.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3><span class="roman">III.</span>Art flourishes</h3>
+      <ul>
+        <li>Wealthy patrons, including popes, princes, and merchants, supported hundreds of artists.</li>
+        <li>Art reflected humanist ideas
+          <ul>
+            <li>Religious figures like Mary and Jesus were still painted, but often with Greek or Roman backgrounds.</li>
+            <li>Portraits of real people showed the interest in individuals. Artists also painted Greek and Roman myths and historical events.</li>
+            <li><strong>Donatello</strong> made a life-size statue of a soldier on horseback, the first since ancient times.</li>
+          </ul>
+        </li>
+        <li>New techniques made art more realistic
+          <ul>
+            <li><strong>Perspective</strong>: showing a three-dimensional world on a flat surface by making faraway objects smaller, creating a sense of depth.</li>
+            <li>Shading with light and dark to make objects look round and real.</li>
+            <li>Studying anatomy and drawing from live models to show the human body accurately.</li>
+          </ul>
+        </li>
+        <li>Architecture
+          <ul>
+            <li>Architects rejected the medieval <strong>Gothic</strong> style as disorderly and brought back Greek and Roman columns, arches, and domes.</li>
+            <li><strong>Filippo Brunelleschi</strong> built the huge dome on Florence’s cathedral (the Duomo), modeled on the Pantheon in Rome. He was also an engineer who invented machines to build it.</li>
+          </ul>
+        </li>
+        <li><strong>Leonardo da Vinci</strong> (born 1452)
+          <ul>
+            <li>Endlessly curious inventor and artist. He sketched nature and studied bodies to learn how bones and muscles work.</li>
+            <li>Painted the <em>Mona Lisa</em> and <em>The Last Supper</em>, a great example of perspective.</li>
+            <li>Interested in botany, anatomy, optics, music, architecture, and engineering. His notebooks show flying machines and underwater boats centuries before they existed.</li>
+          </ul>
+        </li>
+        <li><strong>Michelangelo</strong> (born 1475)
+          <ul>
+            <li>Sculptor, painter, architect, engineer, and poet, supported by the Medici.</li>
+            <li>Sculpted the <em>Pietà</em> (Mary holding Jesus) and <em>David</em>, which echoes ancient Greek sculpture.</li>
+            <li>Starting in 1508, spent about four years painting Bible scenes on the ceiling of the Sistine Chapel in Rome.</li>
+            <li>Designed the dome of St. Peter’s in Rome, a model for later buildings like the U.S. Capitol.</li>
+          </ul>
+        </li>
+        <li><strong>Raphael</strong>
+          <ul>
+            <li>Younger than Leonardo and Michelangelo, he studied their work and blended Christian and classical styles.</li>
+            <li><em>School of Athens</em> shows great thinkers like Plato, Aristotle, Socrates, and Averroës, and includes Michelangelo, Leonardo, and Raphael himself.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3><span class="roman">IV.</span>New books reflect Renaissance themes</h3>
+      <ul>
+        <li>“How-to” books helped ambitious people succeed at the courts of Renaissance rulers.</li>
+        <li><strong>Baldassare Castiglione</strong>, <em>The Book of the Courtier</em>
+          <ul>
+            <li>Described the manners, skills, learning, and virtues a member of the court should have.</li>
+            <li>The ideal man is athletic, plays music, and knows literature and history without being arrogant. The ideal woman is graceful, kind, and lively but reserved.</li>
+          </ul>
+        </li>
+        <li><strong>Niccolò Machiavelli</strong>, <em>The Prince</em> (1513)
+          <ul>
+            <li>A Florentine diplomat who had watched kings and princes up close and studied Roman history.</li>
+            <li>A guide for rulers on how to gain and keep power, based on how real rulers actually behaved, not on high ideals as Plato had written.</li>
+            <li>Argued that <strong>the end justifies the means</strong>: rulers should do whatever is necessary to reach their goals.</li>
+            <li>Critics called it cynical, and <strong>Machiavellian</strong> came to mean using deceit in politics. Others say it was a realistic look at politics, and it still raises debate about power and government.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="review" aria-labelledby="review-h">
+    <h2 id="review-h"><span class="num">2</span>Vocabulary cards</h2>
+    <p class="lede">Tap a card to see what it means. Try to explain it out loud before you flip it.</p>
+    <div class="btn-row">
+      <button class="btn secondary" id="shuffle-cards" type="button">Shuffle cards</button>
+      <button class="btn secondary" id="reset-cards" type="button">Flip all back</button>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section id="quiz" aria-labelledby="quiz-h">
+    <h2 id="quiz-h"><span class="num">3</span>Vocabulary quiz</h2>
+    <p class="lede">Pick the best answer for each one. You can change answers until you press Submit at the bottom. Then you’ll see what you got right, what you missed, and why.</p>
+
+    <div class="results" id="results" hidden tabindex="-1" aria-live="polite"></div>
+
+    <div class="progress">
+      <div class="progress-text" id="progress-text"></div>
+      <div class="bar"><span id="progress-bar"></span></div>
+    </div>
+
+    <form onsubmit="return false;">
+      <div id="questions"></div>
+      <div class="submit-area">
+        <button class="btn" id="submit-quiz" type="button">Submit quiz</button>
+        <div class="note" id="submit-note" hidden role="alert"></div>
+      </div>
+    </form>
+  </section>
+
+  <section id="check" aria-labelledby="check-h">
+    <h2 id="check-h"><span class="num">4</span>Check your understanding</h2>
+    <p class="lede">These match the review questions at the end of the lesson. Answer each one in your head or on paper first, then open the key points to check yourself.</p>
+    <div id="check-list"></div>
+  </section>
+
+</div>
+
+<script>
+/* The first option in each list is the correct answer; options are shuffled when shown. */
+const QUESTIONS = [
+  { term: "Renaissance",
+    def: "The golden age of art and learning in Western Europe from the 1300s to the 1500s. The word means “rebirth.”",
+    prompt: "What is the name for the golden age of art and learning in Western Europe from the 1300s to the 1500s? The word means “rebirth.”",
+    options: ["Renaissance", "Middle Ages", "Humanism", "Reformation"],
+    why: "Renaissance means “rebirth.” People of the time saw it as a rebirth of Greek and Roman learning after the Middle Ages." },
+  { term: "Humanism",
+    def: "The intellectual movement at the heart of the Renaissance. Humanists studied classical Greek and Roman cultures to understand their own times.",
+    prompt: "Which intellectual movement studied classical Greek and Roman cultures to better understand its own times?",
+    options: ["Humanism", "Humanities", "Perspective", "Vernacular"],
+    why: "Humanism is the movement. The humanities are the school subjects humanists emphasized, so don’t mix the two up." },
+  { term: "Humanities",
+    def: "School subjects such as grammar, rhetoric, poetry, and history that were taught in ancient Greek and Roman schools.",
+    prompt: "Grammar, rhetoric, poetry, and history, the subjects taught in ancient Greek and Roman schools, are called the…",
+    options: ["Humanities", "Humanism", "Vernacular", "Rhetoric"],
+    why: "The humanities are the group of subjects. Rhetoric is just one of them." },
+  { term: "Rhetoric",
+    def: "The study of using language effectively.",
+    prompt: "The study of using language effectively is called…",
+    options: ["Rhetoric", "Grammar", "Vernacular", "Poetry"],
+    why: "Rhetoric is about speaking and writing persuasively and effectively. It was one of the humanities." },
+  { term: "Secular",
+    def: "Worldly; having to do with everyday life rather than religion.",
+    prompt: "Humanists focused on worldly subjects instead of religious ones. Another word for worldly is…",
+    options: ["Secular", "Classical", "Vernacular", "Medieval"],
+    why: "Secular means worldly, not religious. Most humanists were still Christians, but they studied life here and now." },
+  { term: "Classical",
+    def: "Having to do with ancient Greece and Rome, their art, writing, and ideas.",
+    prompt: "Art, writing, and ideas from ancient Greece and Rome are described as…",
+    options: ["Classical", "Gothic", "Medieval", "Vernacular"],
+    why: "Classical refers to ancient Greece and Rome. Renaissance artists and scholars revived classical forms and texts." },
+  { term: "Vernacular",
+    def: "The everyday language of ordinary people, as opposed to Latin.",
+    prompt: "Petrarch wrote in Latin, but also in the everyday language of ordinary people, called the…",
+    options: ["Vernacular", "Rhetoric", "Humanities", "Classics"],
+    why: "The vernacular is the language people actually spoke, like Italian, instead of Latin, the language of scholars and the Church." },
+  { term: "Patron",
+    def: "A financial supporter of the arts.",
+    prompt: "Lorenzo de’ Medici paid artists and poets to create their work. A financial supporter of the arts is called a…",
+    options: ["Patron", "Courtier", "Diplomat", "Humanist"],
+    why: "A patron pays for art. Popes, princes, and rich merchants like the Medici were the major patrons of the Renaissance." },
+  { term: "Perspective",
+    def: "An art technique for showing a 3-D world on a flat surface by making faraway objects smaller, creating depth.",
+    prompt: "Which technique lets artists show a three-dimensional world on a flat surface by making distant objects smaller than nearby ones?",
+    options: ["Perspective", "Shading", "Anatomy", "Rhetoric"],
+    why: "Perspective creates the feeling of space and depth. Leonardo’s The Last Supper is a famous example. Shading uses light and dark to make objects look round." },
+  { term: "City-state",
+    def: "A city that governs itself and the land around it, like a small independent country. Florence, Milan, Venice, and Genoa were city-states.",
+    prompt: "Florence, Milan, Venice, and Genoa were each a self-governing city that ruled the land around it. This kind of state is called a…",
+    options: ["City-state", "Kingdom", "Empire", "Republic of Rome"],
+    why: "Italy wasn’t one country yet. It was divided into city-states that grew rich from trade and manufacturing." },
+  { term: "Medici",
+    def: "The banking family of Florence that became the city’s uncrowned rulers and major patrons of the arts.",
+    prompt: "Which family organized a banking business in Florence in the 1400s and went on to rule the city for many years?",
+    options: ["The Medici", "The popes", "The merchants of Venice", "The kings of Naples"],
+    why: "The Medici turned banking wealth into political power. Cosimo de’ Medici took control of Florence’s government in 1434." },
+  { term: "Lorenzo de’ Medici",
+    def: "“The Magnificent.” Cosimo’s grandson; a clever politician and generous patron who represented the Renaissance ideal.",
+    prompt: "Who was known as “the Magnificent,” held Florence together through hard times, and was a generous patron of the arts?",
+    options: ["Lorenzo de’ Medici", "Cosimo de’ Medici", "Baldassare Castiglione", "Niccolò Machiavelli"],
+    why: "Lorenzo was Cosimo’s grandson. Cosimo is the one who first took control of the government in 1434." },
+  { term: "Petrarch",
+    def: "Early humanist from Florence (1300s) who collected Greek and Roman manuscripts and wrote poems in the vernacular.",
+    prompt: "Which early humanist from Florence hunted down ancient Greek and Roman manuscripts and wrote the Sonnets to Laura?",
+    options: ["Francesco Petrarch", "Pico della Mirandola", "Baldassare Castiglione", "Raphael"],
+    why: "Petrarch helped bring back the works of Cicero, Homer, Virgil, and Livy, and wrote poetry in both Latin and the vernacular." },
+  { term: "Pico della Mirandola",
+    def: "Italian thinker who expressed the Renaissance confidence in human ability: people can become whatever they choose.",
+    prompt: "Which Italian thinker captured the Renaissance spirit by writing that people can have whatever they choose and be whatever they want?",
+    options: ["Pico della Mirandola", "Francesco Petrarch", "Niccolò Machiavelli", "Leonardo da Vinci"],
+    why: "Pico della Mirandola’s words show the Renaissance spirit of adventure and confidence in what humans can achieve." },
+  { term: "Leonardo da Vinci",
+    def: "Artist and inventor (born 1452); painted the Mona Lisa and The Last Supper and filled notebooks with inventions like flying machines.",
+    prompt: "Which artist painted the Mona Lisa and The Last Supper and sketched flying machines centuries before airplanes?",
+    options: ["Leonardo da Vinci", "Michelangelo", "Raphael", "Donatello"],
+    why: "Leonardo’s curiosity covered art, anatomy, botany, optics, music, architecture, and engineering. That range is the Renaissance ideal." },
+  { term: "Michelangelo",
+    def: "Sculptor, painter, architect, and poet (born 1475); made the Pietà and David, painted the Sistine Chapel ceiling, designed St. Peter’s dome.",
+    prompt: "Which artist sculpted the Pietà and David and painted the ceiling of the Sistine Chapel?",
+    options: ["Michelangelo", "Leonardo da Vinci", "Raphael", "Brunelleschi"],
+    why: "Michelangelo was the greatest Renaissance sculptor. Later, as an architect, he designed the dome of St. Peter’s in Rome." },
+  { term: "Raphael",
+    def: "Painter who studied Leonardo and Michelangelo and blended Christian and classical styles; painted School of Athens.",
+    prompt: "Which painter created School of Athens, a gathering of great thinkers that also includes Leonardo, Michelangelo, and himself?",
+    options: ["Raphael", "Michelangelo", "Leonardo da Vinci", "Andrea Mantegna"],
+    why: "Raphael was younger than Leonardo and Michelangelo and learned from their work. His paintings mix Christian and classical styles." },
+  { term: "Brunelleschi",
+    def: "Architect and engineer who built the dome of Florence’s cathedral (the Duomo), modeled on the Pantheon in Rome.",
+    prompt: "Which architect built the great dome on Florence’s cathedral, modeling it on the Pantheon in ancient Rome?",
+    options: ["Filippo Brunelleschi", "Michelangelo", "Donatello", "Leonardo da Vinci"],
+    why: "Brunelleschi designed Florence’s dome and invented machines to build it. Michelangelo designed a different dome, St. Peter’s in Rome." },
+  { term: "Donatello",
+    def: "Sculptor who made a life-size statue of a soldier on horseback, the first since ancient times.",
+    prompt: "Which sculptor revived a classical form by making a life-size statue of a soldier on horseback, the first since ancient times?",
+    options: ["Donatello", "Michelangelo", "Brunelleschi", "Raphael"],
+    why: "Donatello studied ancient works and revived classical forms. Brunelleschi studied sculpture with him." },
+  { term: "Gothic",
+    def: "The architectural style of the late Middle Ages, which Renaissance architects rejected as disorderly.",
+    prompt: "Renaissance architects rejected the disorderly style of the late Middle Ages. What was that style called?",
+    options: ["Gothic", "Classical", "Roman", "Renaissance"],
+    why: "Renaissance architects replaced Gothic style with classical Greek and Roman columns, arches, and domes." },
+  { term: "Castiglione",
+    def: "Author of The Book of the Courtier, a handbook on the manners, skills, and virtues of an ideal member of the court.",
+    prompt: "Who wrote The Book of the Courtier, describing the manners, skills, learning, and virtues an ideal member of the court should have?",
+    options: ["Baldassare Castiglione", "Niccolò Machiavelli", "Francesco Petrarch", "Lorenzo de’ Medici"],
+    why: "Castiglione’s book was the most widely read Renaissance handbook. It described ideals for both men and women." },
+  { term: "Machiavelli",
+    def: "Florentine diplomat who wrote The Prince (1513), a realistic guide for rulers on gaining and keeping power.",
+    prompt: "Which former diplomat from Florence wrote The Prince in 1513, a guide for rulers on how to gain and keep power?",
+    options: ["Niccolò Machiavelli", "Baldassare Castiglione", "Pico della Mirandola", "Cosimo de’ Medici"],
+    why: "Machiavelli based The Prince on what he saw real rulers do and on his study of Roman history." },
+  { term: "The end justifies the means",
+    def: "Machiavelli’s idea that a ruler may use whatever methods are needed, as long as the goal is achieved.",
+    prompt: "Machiavelli argued that rulers should use whatever methods are necessary to reach their goals. This idea is summed up as…",
+    options: ["“The end justifies the means”", "“Outer beauty is the sign of inner goodness”", "“A person can be whatever they choose”", "“Knowledge is a rebirth”"],
+    why: "“The end justifies the means” means the result matters more than how you get there. That’s why critics called Machiavelli’s advice cynical." },
+  { term: "Machiavellian",
+    def: "Using deceit or cunning in politics. The word comes from Machiavelli’s name.",
+    prompt: "A politician who lies and tricks people to stay in power might be called…",
+    options: ["Machiavellian", "Secular", "Humanist", "Classical"],
+    why: "Because of The Prince, “Machiavellian” came to mean using deceit in politics." }
+];
+
+const CHECK = [
+  { q: "What were some of the characteristics of the Italian Renaissance?",
+    points: [
+      "Great creativity and change in economics, politics, society, and especially culture",
+      "Renewed interest in classical Greek and Roman learning (humanism)",
+      "Focus on secular, worldly life here and now, not just the afterlife",
+      "Emphasis on individual achievement; the ideal person was skilled in many fields",
+      "A spirit of adventure and curiosity in exploring and science"
+    ] },
+  { q: "How did Italy’s trade with the Muslim world contribute to the Italian Renaissance?",
+    points: [
+      "Ships brought goods, people, and ideas from the Muslim world to Italy’s ports",
+      "Muslim scholars had preserved much ancient Greek and Roman learning",
+      "Texts and knowledge lost in Europe were recovered through these trade contacts",
+      "European scholars also studied Muslim philosophy, art, and science through contacts in Spain and Sicily"
+    ] },
+  { q: "What new ideas and techniques made portrayals of people in Renaissance paintings more realistic and accurate?",
+    points: [
+      "Perspective, to show depth on a flat surface",
+      "Shading with light and dark to make figures look round and real",
+      "Studying human anatomy and drawing from live models",
+      "Humanist interest in the individual, which led to portraits of real people"
+    ] },
+  { q: "What Renaissance theme appears in Machiavelli’s book The Prince?",
+    points: [
+      "Realism: it looked at how real rulers actually behaved, not ideal rulers as Plato described",
+      "A secular focus on worldly power and politics",
+      "Use of classical learning: Machiavelli drew on his study of ancient Roman history"
+    ] },
+  { q: "What was the impact of the Italian Renaissance on architecture?",
+    points: [
+      "Architects rejected the Gothic style as disorderly",
+      "They brought back classical columns, arches, and domes",
+      "Brunelleschi’s dome in Florence was modeled on the Pantheon",
+      "Michelangelo’s dome for St. Peter’s became a model for later buildings, including the U.S. Capitol"
+    ] },
+  { q: "How did the accomplishments of Leonardo da Vinci and Michelangelo reflect Renaissance ideals and values?",
+    points: [
+      "Both were talented in many fields, the Renaissance ideal (art, science, engineering, architecture, poetry)",
+      "Curiosity about the natural world: Leonardo studied anatomy, nature, and inventions",
+      "Realistic, accurate human figures based on the study of anatomy",
+      "Classical influence, like Michelangelo’s David recalling Greek sculpture",
+      "Individual achievement and creativity, supported by patrons like the Medici and the Church"
+    ] }
+];
+
+const $ = (s) => document.querySelector(s);
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function el(tag, cls, text) {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+
+/* ---------- Flashcards ---------- */
+let cardOrder = QUESTIONS.map((_, i) => i);
+function renderCards() {
+  const box = $("#cards");
+  box.innerHTML = "";
+  cardOrder.forEach((i) => {
+    const q = QUESTIONS[i];
+    const btn = el("button", "card");
+    btn.type = "button";
+    btn.setAttribute("aria-label", q.term + ". Tap to show definition.");
+    const inner = el("div", "card-inner");
+    const front = el("div", "face front");
+    front.append(el("span", "term", q.term), el("span", "hint", "Tap to flip"));
+    const back = el("div", "face back");
+    back.setAttribute("aria-hidden", "true");
+    back.append(el("span", null, q.def), el("span", "hint", q.term));
+    inner.append(front, back);
+    btn.append(inner);
+    btn.addEventListener("click", () => {
+      const flipped = btn.classList.toggle("flipped");
+      back.setAttribute("aria-hidden", String(!flipped));
+      front.setAttribute("aria-hidden", String(flipped));
+      btn.setAttribute("aria-label", flipped ? q.term + ": " + q.def : q.term + ". Tap to show definition.");
+    });
+    box.append(btn);
+  });
+}
+$("#shuffle-cards").addEventListener("click", () => { cardOrder = shuffle(cardOrder); renderCards(); });
+$("#reset-cards").addEventListener("click", renderCards);
+
+/* ---------- Quiz ---------- */
+const state = { order: [], opts: {}, picks: {}, submitted: false, isFull: true, lastCorrect: 0 };
+
+function startQuiz(ids, isFull) {
+  state.order = shuffle(ids);
+  state.opts = {};
+  ids.forEach((i) => { state.opts[i] = shuffle(QUESTIONS[i].options); });
+  state.picks = {};
+  state.submitted = false;
+  state.isFull = isFull;
+  $("#results").hidden = true;
+  $("#submit-note").hidden = true;
+  $("#submit-quiz").hidden = false;
+  renderQuiz();
+  updateProgress();
+}
+
+function renderQuiz() {
+  const box = $("#questions");
+  box.innerHTML = "";
+  const total = state.order.length;
+  state.order.forEach((qi, n) => {
+    const q = QUESTIONS[qi];
+    const fs = el("fieldset", "q");
+    fs.id = "q-" + qi;
+    const lg = el("legend");
+    lg.append(el("span", "qnum", "Question " + (n + 1) + " of " + total), el("span", "prompt", q.prompt));
+    fs.append(lg);
+    const opts = el("div", "opts");
+    state.opts[qi].forEach((opt) => {
+      const lab = el("label", "opt");
+      const inp = document.createElement("input");
+      inp.type = "radio";
+      inp.name = "q" + qi;
+      inp.value = opt;
+      inp.addEventListener("change", () => {
+        state.picks[qi] = opt;
+        fs.classList.remove("missing");
+        updateProgress();
+      });
+      lab.append(inp, el("span", null, opt));
+      opts.append(lab);
+    });
+    fs.append(opts);
+    const fb = el("div", "feedback");
+    fb.hidden = true;
+    fs.append(fb);
+    box.append(fs);
+  });
+}
+
+function updateProgress() {
+  const total = state.order.length;
+  const done = state.order.filter((i) => state.picks[i] != null).length;
+  $("#progress-text").textContent = state.submitted
+    ? "Submitted: " + state.lastCorrect + " of " + total + " correct"
+    : done + " of " + total + " answered";
+  $("#progress-bar").style.width = (total ? (done / total) * 100 : 0) + "%";
+}
+
+$("#submit-quiz").addEventListener("click", () => {
+  const unanswered = state.order.filter((i) => state.picks[i] == null);
+  if (unanswered.length === 0) { grade(); return; }
+  unanswered.forEach((i) => $("#q-" + i).classList.add("missing"));
+  const note = $("#submit-note");
+  note.innerHTML = "";
+  const count = unanswered.length;
+  note.append(el("p", null,
+    count + (count === 1 ? " question is" : " questions are") +
+    " still unanswered (outlined in gold). Unanswered questions count as wrong."));
+  const row = el("div", "btn-row");
+  const go = el("button", "btn secondary", "Go to first unanswered");
+  go.type = "button";
+  go.addEventListener("click", () => {
+    const first = document.getElementById("q-" + unanswered[0]);
+    first.scrollIntoView({ behavior: "smooth", block: "start" });
+    first.querySelector("input").focus({ preventScroll: true });
+  });
+  const anyway = el("button", "btn", "Submit anyway");
+  anyway.type = "button";
+  anyway.addEventListener("click", grade);
+  row.append(go, anyway);
+  note.append(row);
+  note.hidden = false;
+});
+
+function grade() {
+  state.submitted = true;
+  $("#submit-note").hidden = true;
+  $("#submit-quiz").hidden = true;
+  let correct = 0;
+  const missed = [];
+  state.order.forEach((qi) => {
+    const q = QUESTIONS[qi];
+    const answer = q.options[0];
+    const pick = state.picks[qi];
+    const right = pick === answer;
+    if (right) correct++; else missed.push(qi);
+    const fs = $("#q-" + qi);
+    fs.classList.remove("missing");
+    fs.classList.add("graded", right ? "is-right" : "is-wrong");
+    fs.querySelectorAll("label.opt").forEach((lab) => {
+      const inp = lab.querySelector("input");
+      inp.disabled = true;
+      if (inp.value === answer) {
+        lab.classList.add("is-answer");
+        lab.append(el("span", "tag", right ? "✓ Your answer" : "✓ Correct answer"));
+      } else if (inp.value === pick) {
+        lab.classList.add("is-wrong-pick");
+        lab.append(el("span", "tag", "✗ Your answer"));
+      }
+    });
+    const fb = fs.querySelector(".feedback");
+    fb.className = "feedback " + (right ? "good" : "bad");
+    let head;
+    if (right) head = "Correct!";
+    else if (pick == null) head = "No answer. The answer is " + answer + ".";
+    else head = "Not quite. You picked " + pick + ", but the answer is " + answer + ".";
+    fb.append(el("strong", null, head), el("span", null, q.why));
+    fb.hidden = false;
+  });
+  state.lastCorrect = correct;
+  showResults(correct, state.order.length, missed);
+  updateProgress();
+}
+
+function showResults(correct, total, missed) {
+  const pct = Math.round((correct / total) * 100);
+  const box = $("#results");
+  box.innerHTML = "";
+  const line = el("div", "score-line");
+  line.append(el("span", "score-big", correct + "/" + total), el("span", "score-pct", pct + "% correct"));
+  box.append(line);
+
+  let msg;
+  if (!state.isFull && pct === 100) msg = "You got every missed question right this time. Nice recovery.";
+  else if (pct === 100) msg = "Every one right. You know this vocabulary.";
+  else if (pct >= 80) msg = "Solid work. Read the explanations for the ones you missed, then retake just those.";
+  else if (pct >= 60) msg = "Getting there. Flip through the cards for the terms you missed, then retake them.";
+  else msg = "Worth another pass. Read the explanations below, review the outline and cards, and try again.";
+  box.append(el("p", null, msg));
+
+  if (missed.length) {
+    box.append(el("p", null, "Terms to review (tap one to jump to it):"));
+    const ul = el("ul", "missed");
+    missed.forEach((qi) => {
+      const li = el("li");
+      const b = el("button", null, QUESTIONS[qi].term);
+      b.type = "button";
+      b.addEventListener("click", () => document.getElementById("q-" + qi).scrollIntoView({ behavior: "smooth", block: "start" }));
+      li.append(b);
+      ul.append(li);
+    });
+    box.append(ul);
+  }
+
+  const row = el("div", "btn-row");
+  if (missed.length) {
+    const rm = el("button", "btn", "Retake the " + missed.length + " I missed");
+    rm.type = "button";
+    rm.addEventListener("click", () => { startQuiz(missed, false); $("#quiz").scrollIntoView({ behavior: "smooth" }); });
+    row.append(rm);
+  }
+  const ra = el("button", missed.length ? "btn secondary" : "btn", "Retake the whole quiz");
+  ra.type = "button";
+  ra.addEventListener("click", () => { startQuiz(QUESTIONS.map((_, i) => i), true); $("#quiz").scrollIntoView({ behavior: "smooth" }); });
+  row.append(ra);
+  box.append(row);
+
+  box.hidden = false;
+  box.scrollIntoView({ behavior: "smooth", block: "start" });
+  box.focus({ preventScroll: true });
+}
+
+/* ---------- Check your understanding ---------- */
+function renderCheck() {
+  const box = $("#check-list");
+  CHECK.forEach((c, i) => {
+    const d = el("details", "cq");
+    const s = el("summary");
+    s.append(el("span", "cq-n", (i + 1) + "."), el("span", null, c.q));
+    d.append(s);
+    const ul = el("ul");
+    c.points.forEach((p) => ul.append(el("li", null, p)));
+    d.append(ul);
+    box.append(d);
+  });
+}
+
+/* ---------- Start ---------- */
+renderCards();
+startQuiz(QUESTIONS.map((_, i) => i), true);
+renderCheck();
+</script>
+</body>
+</html>

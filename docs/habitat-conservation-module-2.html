@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Module 2: Principles of Habitat Conservation &amp; Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EAF1F1;
+    --surface: #FFFFFF;
+    --ink: #14302F;
+    --muted: #4F6766;
+    --line: #C6D6D5;
+    --teal: #1F6F78;
+    --teal-soft: #DCEDEE;
+    --gold: #D9A93A;
+    --good: #2E7D4F;
+    --good-soft: #DDEFE3;
+    --bad: #B02A4A;
+    --bad-soft: #F7DFE5;
+    --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --body: "Atkinson Hyperlegible", Verdana, "Segoe UI", system-ui, sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0E1C1C; --surface: #152828; --ink: #E2EEED; --muted: #9DB4B2; --line: #2C4544;
+      --teal: #6CC3CB; --teal-soft: #173B3E; --gold: #E2B457;
+      --good: #62C48E; --good-soft: #1B3F2E; --bad: #F27C97; --bad-soft: #43202A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0E1C1C; --surface: #152828; --ink: #E2EEED; --muted: #9DB4B2; --line: #2C4544;
+    --teal: #6CC3CB; --teal-soft: #173B3E; --gold: #E2B457;
+    --good: #62C48E; --good-soft: #1B3F2E; --bad: #F27C97; --bad-soft: #43202A;
+  }
+  html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 5rem); }
+  *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 1.0625rem/1.6 var(--body); }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; }
+
+  .hero { padding: 3.25rem 0 2rem; display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: end; }
+  .hero h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2.2rem, 6.5vw, 3.5rem); line-height: 1.02; letter-spacing: -0.025em; margin: 0 0 1rem; }
+  .hero h1 small { display: block; font-size: 0.4em; font-weight: 600; letter-spacing: -0.01em; color: var(--muted); margin-bottom: 0.5rem; }
+  .hero p { margin: 0; color: var(--muted); max-width: 32rem; }
+  .scene { width: 9rem; height: auto; }
+  @media (max-width: 34rem) {
+    .hero { grid-template-columns: 1fr; padding-top: 2.25rem; }
+    .scene { width: 6rem; order: -1; }
+  }
+  .steps { list-style: none; margin: 0 0 1rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+  .steps a { color: var(--ink); font-weight: 700; text-decoration-color: var(--teal); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+  section { padding: 2.5rem 0 1.5rem; border-top: 1px solid var(--line); }
+  h2 { font-family: var(--display); font-weight: 800; font-size: 1.8rem; line-height: 1.15; letter-spacing: -0.015em; margin: 0 0 0.4rem; display: flex; gap: 0.75rem; align-items: center; }
+  .num { flex: none; width: 2rem; height: 2rem; border-radius: 50%; display: inline-grid; place-items: center; background: var(--teal); color: var(--surface); font-size: 1rem; }
+  .lede { color: var(--muted); margin: 0 0 1.25rem; }
+
+  .btn { font: 700 1rem var(--body); padding: 0.7rem 1.3rem; border-radius: 999px; border: 2px solid var(--ink); background: var(--ink); color: var(--bg); cursor: pointer; }
+  .btn.secondary { background: transparent; color: var(--ink); }
+  .btn.small { font-size: 0.92rem; padding: 0.5rem 1rem; }
+  .btn:hover { filter: brightness(1.12); }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+  /* Flashcards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+  .card { perspective: 900px; border: 0; padding: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; border-radius: 0.8rem; }
+  .card-inner { display: grid; min-height: 9.5rem; transition: transform 0.45s ease; transform-style: preserve-3d; }
+  .card.flipped .card-inner { transform: rotateY(180deg); }
+  .face { grid-area: 1 / 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; border: 1px solid var(--line); border-radius: 0.8rem; background: var(--surface); padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; gap: 0.5rem; }
+  .face.back { transform: rotateY(180deg); background: var(--teal-soft); border-color: var(--teal); font-size: 0.95rem; line-height: 1.45; }
+  .card .term { font-family: var(--display); font-weight: 800; font-size: 1.3rem; line-height: 1.1; }
+  .card .hint { font-size: 0.8rem; color: var(--muted); }
+  @media (prefers-reduced-motion: reduce) { .card-inner { transition: none; } }
+
+  /* Quiz */
+  .progress { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding: 0.75rem 0; margin-bottom: 0.5rem; }
+  .progress-text { font-size: 0.9rem; font-weight: 700; color: var(--muted); }
+  .bar { height: 0.45rem; border-radius: 999px; background: var(--line); overflow: hidden; margin-top: 0.35rem; }
+  .bar span { display: block; height: 100%; width: 0; background: var(--teal); transition: width 0.25s; }
+  fieldset.q { border: 1.5px solid var(--line); background: var(--surface); border-radius: 0.9rem; padding: 1.1rem 1.2rem 1.2rem; margin: 0 0 1rem; min-width: 0; }
+  fieldset.q legend { float: left; width: 100%; padding: 0; margin: 0 0 0.8rem; }
+  .qnum { display: block; font-size: 0.85rem; font-weight: 700; color: var(--muted); }
+  .prompt { display: block; font-size: 1.1rem; line-height: 1.5; }
+  .opts { clear: both; display: grid; gap: 0.5rem; }
+  .opt { display: flex; gap: 0.7rem; align-items: center; padding: 0.65rem 0.85rem; border: 1.5px solid var(--line); border-radius: 0.6rem; cursor: pointer; }
+  .opt:hover { border-color: var(--teal); }
+  .opt input { accent-color: var(--teal); width: 1.15rem; height: 1.15rem; margin: 0; flex: none; }
+  .opt:has(input:checked) { border-color: var(--teal); background: var(--teal-soft); }
+  .opt:has(input:focus-visible) { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .opt .tag { margin-left: auto; font-size: 0.8rem; font-weight: 700; white-space: nowrap; }
+  fieldset.q.missing { border-color: var(--gold); }
+  fieldset.q.graded .opt { cursor: default; }
+  fieldset.q.graded .opt:hover { border-color: var(--line); }
+  fieldset.q.graded .opt:has(input:checked) { background: transparent; border-color: var(--line); }
+  fieldset.q.is-right { border-color: var(--good); border-left-width: 6px; }
+  fieldset.q.is-wrong { border-color: var(--bad); border-left-width: 6px; }
+  fieldset.q.graded .opt.is-answer { border-color: var(--good); background: var(--good-soft); }
+  fieldset.q.graded .opt.is-answer .tag { color: var(--good); }
+  fieldset.q.graded .opt.is-wrong-pick { border-color: var(--bad); background: var(--bad-soft); }
+  fieldset.q.graded .opt.is-wrong-pick .tag { color: var(--bad); }
+  .feedback { margin-top: 0.9rem; padding: 0.8rem 1rem; border-radius: 0.6rem; font-size: 0.97rem; line-height: 1.5; }
+  .feedback strong { display: block; margin-bottom: 0.15rem; }
+  .feedback span { display: block; }
+  .feedback span + span { margin-top: 0.3rem; }
+  .feedback.good { background: var(--good-soft); }
+  .feedback.good strong { color: var(--good); }
+  .feedback.bad { background: var(--bad-soft); }
+  .feedback.bad strong { color: var(--bad); }
+  .submit-area { margin: 1.5rem 0 1rem; }
+  .note { margin-top: 0.9rem; padding: 0.9rem 1rem; border: 1.5px solid var(--gold); border-radius: 0.6rem; background: var(--surface); }
+  .note p { margin: 0 0 0.75rem; }
+  .results { background: var(--surface); border: 2px solid var(--teal); border-radius: 1rem; padding: 1.4rem 1.5rem; margin: 0.5rem 0 1.5rem; }
+  .score-line { display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; }
+  .score-big { font-family: var(--display); font-weight: 800; font-size: 3rem; line-height: 1; letter-spacing: -0.03em; }
+  .score-pct { font-weight: 700; color: var(--muted); }
+  .results p { margin: 0.75rem 0; }
+  .missed { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1rem; padding: 0; list-style: none; }
+  .missed button { font: 700 0.9rem var(--body); color: var(--bad); background: var(--bad-soft); border: 0; border-radius: 999px; padding: 0.35rem 0.8rem; cursor: pointer; }
+
+  /* Review questions */
+  #review-q { padding-bottom: 4rem; }
+  .group-h { font-family: var(--display); font-weight: 800; font-size: 1.3rem; line-height: 1.2; margin: 2rem 0 0.75rem; color: var(--teal); }
+  .rq { border: 1.5px solid var(--line); background: var(--surface); border-radius: 0.9rem; padding: 1.1rem 1.2rem 1.2rem; margin: 0 0 1rem; }
+  .rq-q { font-weight: 700; margin: 0 0 0.7rem; display: flex; gap: 0.6rem; }
+  .rq-q .n { color: var(--teal); flex: none; }
+  .rq textarea { width: 100%; min-height: 5.5rem; resize: vertical; font: 1rem/1.5 var(--body); color: var(--ink); background: var(--bg); border: 1.5px solid var(--line); border-radius: 0.6rem; padding: 0.65rem 0.8rem; margin-bottom: 0.7rem; }
+  .rq textarea:focus { border-color: var(--teal); outline: none; box-shadow: 0 0 0 3px var(--teal-soft); }
+  .cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.4rem; }
+  @media (max-width: 34rem) { .cmp { grid-template-columns: 1fr; gap: 0.5rem; } }
+  .cmp-cell { border: 1.5px solid var(--line); border-radius: 0.7rem; padding: 0.85rem 1rem; font-size: 0.97rem; line-height: 1.5; background: var(--surface); }
+  .cmp-yours .cmp-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .cmp-guide { background: var(--teal-soft); border-color: var(--teal); }
+  .cmp-label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--muted); margin-bottom: 0.3rem; }
+  .cmp-guide .cmp-label { color: var(--teal); }
+  .cmp-empty { color: var(--muted); font-style: italic; }
+  .cmp-cell ul { margin: 0; padding-left: 1.15rem; }
+  .cmp-cell li { margin: 0.2rem 0; }
+  .cmp-cell .tip { margin: 0.6rem 0 0; font-size: 0.9rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div>
+      <h1><small>Module 2 test review</small>Principles of Habitat Conservation &amp; Management</h1>
+      <p>Learn the vocabulary with the cards, take the quiz, then work through the review questions and check your answers against the study guide.</p>
+    </div>
+    <svg class="scene" viewBox="0 0 140 120" aria-hidden="true">
+      <circle cx="104" cy="26" r="12" fill="var(--gold)"/>
+      <path d="M0 78 L38 34 L62 60 L82 40 L140 92 L140 120 L0 120 Z" fill="var(--teal)" opacity="0.45"/>
+      <path d="M26 86 L36 62 L46 86 Z M30 74 L36 54 L42 74 Z" fill="var(--teal)"/>
+      <rect x="34.5" y="86" width="3" height="6" fill="var(--teal)"/>
+      <path d="M0 96 C18 88 30 104 48 96 C66 88 78 104 96 96 C114 88 126 104 140 96 L140 120 L0 120 Z" fill="var(--teal)"/>
+    </svg>
+  </header>
+
+  <nav aria-label="Sections">
+    <ol class="steps">
+      <li><a href="#cards-sec">1. Vocabulary cards</a></li>
+      <li><a href="#quiz">2. Vocabulary quiz</a></li>
+      <li><a href="#review-q">3. Review questions</a></li>
+    </ol>
+  </nav>
+
+  <section id="cards-sec" aria-labelledby="cards-h">
+    <h2 id="cards-h"><span class="num">1</span>Vocabulary cards</h2>
+    <p class="lede">All 38 terms from the vocabulary handout. Tap a card to see the definition. Try to say it out loud before you flip.</p>
+    <div class="btn-row">
+      <button class="btn secondary" id="shuffle-cards" type="button">Shuffle cards</button>
+      <button class="btn secondary" id="reset-cards" type="button">Flip all back</button>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section id="quiz" aria-labelledby="quiz-h">
+    <h2 id="quiz-h"><span class="num">2</span>Vocabulary quiz</h2>
+    <p class="lede">Pick the term that matches each definition. You can change answers until you press Submit at the bottom. Then you’ll see what you got right, what you missed, and what the wrong answers actually mean.</p>
+    <div class="results" id="results" hidden tabindex="-1" aria-live="polite"></div>
+    <div class="progress">
+      <div class="progress-text" id="progress-text"></div>
+      <div class="bar"><span id="progress-bar"></span></div>
+    </div>
+    <form onsubmit="return false;">
+      <div id="questions"></div>
+      <div class="submit-area">
+        <button class="btn" id="submit-quiz" type="button">Submit quiz</button>
+        <div class="note" id="submit-note" hidden role="alert"></div>
+      </div>
+    </form>
+  </section>
+
+  <section id="review-q" aria-labelledby="rq-h">
+    <h2 id="rq-h"><span class="num">3</span>Review questions</h2>
+    <p class="lede">The questions from the Module 2 study guide, grouped by topic and numbered like the worksheet. Type your answer, then tap “Check my answer” to compare it with the study guide. Your wording doesn’t need to match. Look for the same key ideas.</p>
+    <div id="rq-list"></div>
+  </section>
+
+</div>
+
+<script>
+/* ---------- Vocabulary ---------- */
+const VOCAB = [
+  { term: "Aquatic", g: "water", def: "Related to water." },
+  { term: "Aquifer", g: "water", def: "An underground layer of rock that water can soak into and be stored in." },
+  { term: "Bathypelagic sub-zone", g: "ocean", def: "The part of the oceanic zone below 1,000 meters deep." },
+  { term: "Bogs", g: "water", def: "Wetland areas with clay soil, where water can’t seep into the ground." },
+  { term: "Coniferous trees", g: "biome", def: "Trees that keep green needles year-round and have sap that keeps them from freezing." },
+  { term: "Continental shelf", g: "ocean", def: "The area of land under the sea that lies close to a continent." },
+  { term: "Crustaceans", g: "ocean", def: "Invertebrate aquatic animals such as crabs, lobsters, and shrimp." },
+  { term: "Cultural services", g: "services", def: "Non-material benefits a habitat provides, such as tourism and recreation." },
+  { term: "Deciduous forests", g: "biome", def: "Mid-latitude habitats covered in broad-leaved trees that shed their leaves in winter." },
+  { term: "Deforestation", g: "threats", def: "Clearing forest land for farming or urban development." },
+  { term: "Deserts", g: "biome", def: "Habitats with less than 10 inches of rain a year and temperatures that can top 110°F (43°C)." },
+  { term: "Ecosystem", g: "services", def: "An interconnected biological system made up of living organisms and their physical environment." },
+  { term: "Epipelagic sub-zone", g: "ocean", def: "The part of the oceanic zone from the ocean’s surface down to about 200 meters." },
+  { term: "Glacier", g: "water", def: "A mass or river of ice formed from compressed snow and ice." },
+  { term: "Grasslands", g: "biome", def: "Habitats of flat plains with few trees and temperatures from −40 to 100°F (−40 to 38°C)." },
+  { term: "Habitat", g: "services", def: "The area where animals, plants, and other organisms live." },
+  { term: "Habitat degradation", g: "threats", def: "Polluting a habitat until its quality can no longer support life." },
+  { term: "Habitat destruction", g: "threats", def: "The complete loss of a habitat through direct human action." },
+  { term: "Habitat fragmentation", g: "threats", def: "Breaking up a habitat until it can no longer function." },
+  { term: "Management", g: "care", def: "The process of maintaining and caring for a habitat so it keeps functioning properly." },
+  { term: "Market hunting", g: "threats", def: "Mostly unregulated commercial hunting and selling of wildlife, which caused severe population declines." },
+  { term: "Marshes", g: "water", def: "Wetland areas that are constantly filled with water." },
+  { term: "Mesopelagic sub-zone", g: "ocean", def: "The part of the oceanic zone from the bottom of the epipelagic sub-zone down to about 1,000 meters." },
+  { term: "Neritic zone", g: "ocean", def: "The marine habitat that extends from the coast out to the edge of the continental shelf." },
+  { term: "Oceanic zone", g: "ocean", def: "The ocean habitat beyond the continental shelf." },
+  { term: "Permafrost", g: "biome", def: "Soil that stays frozen for most of the year." },
+  { term: "Phytoplankton", g: "ocean", def: "Microscopic marine algae." },
+  { term: "Preservation", g: "care", def: "Not using natural resources at all, with little to no human interference." },
+  { term: "Provisional services", g: "services", def: "Products we get from a habitat and use every day, such as food, water, wood, and oil." },
+  { term: "Regulating services", g: "services", def: "Natural processes a habitat controls, such as balancing predator and prey populations and preventing soil erosion." },
+  { term: "Restoration", g: "care", def: "Taking an area that has been degraded and rebuilding it." },
+  { term: "Supporting services", g: "services", def: "Natural processes a habitat carries out that maintain the conditions of the Earth." },
+  { term: "Taiga", g: "biome", def: "The habitat just south of the tundra, covered in coniferous forest." },
+  { term: "Terrestrial", g: "water", def: "Related to soil or dry land." },
+  { term: "Tropical rainforest", g: "biome", def: "A habitat with 50 to 260 inches of rain a year, constant humidity of 77–90%, and trees that form a canopy." },
+  { term: "Tundra", g: "biome", def: "The northernmost land habitat; it has no trees and the subsoil is frozen year-round." },
+  { term: "Urban sprawl", g: "threats", def: "The rapid spread of cities into surrounding areas, which quickly destroys the environment around them." },
+  { term: "Wetlands", g: "water", def: "Habitats where shallow pools of water form because the land drains poorly." }
+];
+/* Small groups borrow distractors from a related group */
+const RELATED = { care: ["threats"], threats: ["care"], services: ["care"], water: ["ocean"], ocean: ["water"], biome: ["water"] };
+
+/* ---------- Review questions (study guide answers) ---------- */
+const REVIEW = [
+  { group: "Habitats and what they give us", items: [
+    { n: 26, q: "What five factors are a requirement for a healthy and successful habitat? Explain why.",
+      a: ["Food: gives organisms energy to survive and grow",
+          "Water: every living thing needs it",
+          "Cover (shelter): protection from predators and weather, and a safe place to raise young",
+          "Space: room to find food and mates without overcrowding",
+          "Arrangement: food, water, cover, and space have to be close enough together for animals to reach them"] },
+    { n: 1, q: "Provide one example of each type of service provided by habitats: provisional, cultural, regulating, and supporting.",
+      a: ["Provisional (products we use): food and crops, water, wood, or oil",
+          "Cultural (non-material benefits): tourism and recreation, like hiking, camping, or fishing",
+          "Regulating (natural processes a habitat controls): preventing soil erosion, or keeping predator and prey populations in balance",
+          "Supporting (processes that keep Earth livable): nutrient cycling, soil formation, or plants producing oxygen"],
+      tip: "You need an example for all four types, not just one." },
+    { n: 27, q: "What benefits to people do ecosystems and habitats provide?",
+      a: ["Provisional services: food, water, wood, oil",
+          "Regulating services: erosion control, balanced predator and prey populations",
+          "Cultural services: recreation and tourism",
+          "Supporting services: processes like nutrient cycling and oxygen production that keep Earth livable"],
+      tip: "The four types are provisional, regulating, cultural, and supporting. Recreation is an example of a cultural service, not its own type." }
+  ]},
+  { group: "Water and the ocean", items: [
+    { n: 3, q: "Approximately what percentage of Earth’s freshwater is found at the surface, and what percentage is trapped in glaciers or stored in underground aquifers?",
+      a: ["About 1% of Earth’s freshwater is at the surface, in lakes, rivers, and ponds",
+          "About 99% is locked in glaciers and ice or stored underground in aquifers"] },
+    { n: 2, q: "Describe the 4 major marine/oceanic zones, including how they differ in location, depth, light, or environmental conditions.",
+      a: ["Neritic zone: from the coast out to the edge of the continental shelf. Shallow, sunny, and full of nutrients, so it has the most marine life",
+          "Epipelagic sub-zone: the surface of the open ocean down to about 200 meters. Plenty of sunlight, so plants and phytoplankton can photosynthesize",
+          "Mesopelagic sub-zone: about 200 to 1,000 meters. Dim “twilight” light, too dark for photosynthesis, and colder",
+          "Bathypelagic sub-zone: below 1,000 meters. Totally dark, near freezing, with crushing pressure. Many animals there make their own light"],
+      tip: "The three “pelagic” sub-zones are layers of the oceanic zone, the open ocean beyond the continental shelf." },
+    { n: 24, q: "Explain how tiny organisms known as phytoplankton living in the neritic zone impact oxygen availability for our planet.",
+      a: ["Phytoplankton are microscopic marine algae",
+          "They use sunlight to photosynthesize, which releases oxygen",
+          "They produce about half of the oxygen on Earth",
+          "The neritic zone is shallow, sunny, and rich in nutrients, so huge numbers of them can grow there",
+          "They are also the base of the ocean food web"] },
+    { n: 8, q: "Define each vocabulary term: crustaceans, terrestrial, aquatic, and phytoplankton.",
+      a: ["Crustaceans: invertebrate aquatic animals such as crabs, lobsters, and shrimp",
+          "Terrestrial: related to soil or dry land",
+          "Aquatic: related to water",
+          "Phytoplankton: microscopic marine algae"] },
+    { n: 4, q: "Describe the flora and fauna commonly found in a bog, and explain how the bog’s wet, acidic conditions influence them.",
+      a: ["Flora: sphagnum (peat) moss, carnivorous plants like pitcher plants and sundews, shrubs like cranberries, and a few trees like black spruce",
+          "Fauna: insects, frogs, salamanders, turtles, dragonflies, and birds",
+          "Water doesn’t drain from a bog, and it is acidic and low in nutrients",
+          "Dead plants break down very slowly, so they build up as peat",
+          "Carnivorous plants catch insects to get the nutrients the soil can’t give them. Only plants and animals adapted to these conditions survive"] }
+  ]},
+  { group: "Biomes", items: [
+    { n: 5, q: "Describe the characteristic flora of each biome: tundra, taiga, tropical rainforest, deciduous forest, desert, and grassland.",
+      a: ["Tundra: no trees. Mosses, lichens, grasses, and low shrubs, because permafrost keeps roots shallow",
+          "Taiga: coniferous trees like spruce, fir, and pine",
+          "Tropical rainforest: tall trees that form a canopy, plus vines, ferns, and plants like orchids that grow on other plants",
+          "Deciduous forest: broad-leaved trees like oak and maple that drop their leaves in winter, plus shrubs and wildflowers",
+          "Desert: cacti and other plants that store water, and shrubs with small leaves and deep or wide roots",
+          "Grassland: grasses and wildflowers, with very few trees"],
+      tip: "Flora means plants. The question is only asking about plants, not animals or climate." },
+    { n: 6, q: "Explain five important characteristics of tropical rainforests: where most animals live, their share of Earth’s species, habitat diversity, their percentage of Earth’s surface, and soil nutrient levels.",
+      a: ["Most animals live up in the trees (the canopy), not on the ground",
+          "They are home to more than half of Earth’s plant and animal species",
+          "They are the most diverse habitat: even a small patch, about 2.5 acres, can hold a huge number of species",
+          "They cover only about 6% of Earth’s surface",
+          "The soil is poor in nutrients, because heavy rain washes nutrients away and most nutrients are stored in the plants"],
+      tip: "Don’t forget the fifth one: soil nutrients." },
+    { n: 10, q: "Which habitat (biome) is most likely to contain heavy grazers and many burrowing animals? Explain why those organisms are well suited to that biome.",
+      a: ["Grasslands",
+          "Grazers: there is plenty of grass to eat and wide-open plains to roam",
+          "Burrowers: with very few trees, digging underground gives shelter from predators, extreme temperatures, and fires"] },
+    { n: 16, q: "Describe a grassland ecosystem, including its climate, dominant plants, important consumers, and the role of fire or grazing.",
+      a: ["Climate: temperatures from −40 to 100°F, with enough rain for grass but not enough for many trees",
+          "Dominant plants: grasses and wildflowers, with few trees",
+          "Consumers: grazers like bison and pronghorn, burrowers like prairie dogs, and predators like coyotes",
+          "Fire and grazing clear out dead plants and keep trees from taking over. Grass grows back quickly from its deep roots"] },
+    { n: 11, q: "Where is the taiga found on Earth? Identify the major countries or regions in which it occurs.",
+      a: ["In the far north, just south of the tundra, roughly between 50° and 60° north latitude",
+          "Canada, Alaska, Russia (especially Siberia), and Scandinavia (Norway, Sweden, Finland)"] },
+    { n: 12, q: "Describe desert habitats in terms of rainfall, temperature, available food, and the survival strategies used by their organisms.",
+      a: ["Rainfall: less than 10 inches a year",
+          "Temperature: can reach over 110°F (43°C) in the day, and can get cold at night",
+          "Food and water are scarce",
+          "Plant strategies: storing water (cacti), spines or small leaves to lose less water, deep or widespread roots",
+          "Animal strategies: being active at night, burrowing to escape heat, and getting water from their food. Many are reptiles"] },
+    { n: 13, q: "Approximately what percentage of Earth’s surface is covered by deciduous forests?",
+      a: ["About 9%"],
+      tip: "Different sources give different numbers for this. Use the figure from your lesson notes." },
+    { n: 25, q: "Compare and contrast a deciduous forest and a boreal forest. Include details such as precipitation, temperature, location, types of vegetation (flora), and fauna.",
+      a: ["Location: deciduous forests are in the mid-latitudes (eastern U.S., Europe, eastern Asia). Boreal forest (taiga) is far north, just below the tundra",
+          "Temperature: deciduous forests have four seasons with warm summers and cold winters. Boreal forests have long, very cold winters and short, cool summers",
+          "Precipitation: deciduous forests get more rain. Boreal forests get less, mostly as snow",
+          "Flora: deciduous forests have broad-leaved trees that drop their leaves. Boreal forests have coniferous evergreens",
+          "Fauna: deciduous forests have deer, squirrels, foxes, and black bears. Boreal forests have moose, lynx, wolves, and snowshoe hares",
+          "Alike: both are forests with seasons, and both have mammals and trees adapted to their climate"] }
+  ]},
+  { group: "Threats to habitats", items: [
+    { n: 7, q: "Compare and contrast habitat fragmentation, habitat degradation, and habitat destruction. Include how each affects organisms and ecosystems.",
+      a: ["Fragmentation: a habitat is broken into smaller, separated pieces. Animals can’t move between them to find food or mates, and the habitat stops functioning",
+          "Degradation: pollution or damage lowers the habitat’s quality until it can no longer support life. The habitat is still there, but it’s unhealthy",
+          "Destruction: the habitat is completely lost through direct human action, like clearing or paving. Organisms must move or die",
+          "Alike: all three are mostly caused by people and reduce biodiversity. The difference is how severe: damaged, broken up, or gone"] },
+    { n: 9, q: "What is urban sprawl, and why can it threaten habitats and biodiversity?",
+      a: ["Urban sprawl is the rapid spread of cities into the surrounding land",
+          "It replaces natural habitat with roads, houses, and buildings",
+          "It breaks up the habitat that’s left and adds pollution",
+          "Fewer species can survive, so biodiversity drops"] }
+  ]},
+  { group: "Conservation history", items: [
+    { n: 14, q: "How did many early settlers understand and use the natural resources of the United States before conservation efforts became widespread?",
+      a: ["They believed natural resources were unlimited",
+          "They used them freely: clearing forests for farms and lumber and hunting heavily, including market hunting",
+          "There were few rules, which led to severe wildlife declines"] },
+    { n: 17, q: "What major contributions did THEODORE Roosevelt make to United States conservation efforts?",
+      a: ["Created the first national wildlife refuge (Pelican Island, Florida)",
+          "Established the U.S. Forest Service",
+          "Set aside millions of acres of public land as national forests, parks, monuments, and refuges",
+          "Made conservation a national priority"] },
+    { n: 19, q: "What did the National Park Service Act of 1916 accomplish and what was its main purpose?",
+      a: ["It created the National Park Service, a federal agency to run the national parks and monuments (35 at the time) as one system",
+          "Purpose: to protect the scenery, natural features, history, and wildlife of the parks, while letting people enjoy them in a way that leaves them unharmed for future generations"] },
+    { n: 15, q: "Describe the Civilian Conservation Corps, including its mission and the person who created it.",
+      a: ["Created by President Franklin D. Roosevelt in 1933, during the Great Depression",
+          "It gave jobs to young unemployed men",
+          "Mission: conserve and restore natural resources. Workers planted trees, built trails and parks, and fought soil erosion and forest fires"] },
+    { n: 18, q: "What major contributions did FRANKLIN D. Roosevelt make to conservation restoration efforts during the Great Depression era?",
+      a: ["Created the Civilian Conservation Corps, putting people to work restoring land",
+          "Started soil conservation programs after the Dust Bowl",
+          "Expanded national parks and wildlife refuges",
+          "Signed the Taylor Grazing Act to control overgrazing"] },
+    { n: 20, q: "What was the ultimate goal behind the establishment of the Taylor Grazing Act of 1934?",
+      a: ["To stop overgrazing and soil damage on public rangeland",
+          "It created grazing districts with permits and limits on livestock",
+          "Goal: protect the land while keeping ranching going"] },
+    { n: 21, q: "What was the purpose behind the National Environmental Policy Act of 1970?",
+      a: ["It requires federal government agencies to study and report the environmental effects of their projects before they’re approved (environmental impact statements)",
+          "Purpose: make protecting the environment part of every government decision"] }
+  ]},
+  { group: "Caring for habitats", items: [
+    { n: 22, q: "Explain the difference between conservation, preservation, and restoration.",
+      a: ["Conservation: wise, careful use and management of natural resources so they last",
+          "Preservation: not using a resource at all, with little to no human interference",
+          "Restoration: rebuilding an area that has been degraded",
+          "Key difference: conservation allows use, preservation doesn’t, and restoration fixes damage that’s already happened"] },
+    { n: 23, q: "Why are public education and management of resources important?",
+      a: ["Education helps people understand how their choices affect habitats, so they make smart decisions now and in the future and support protecting them",
+          "Management keeps habitats maintained and functioning, balancing what people use with what habitats need"] }
+  ]}
+];
+
+const $ = (s) => document.querySelector(s);
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function el(tag, cls, text) {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+const byTerm = {};
+VOCAB.forEach((v) => { byTerm[v.term] = v; });
+
+/* ---------- Flashcards ---------- */
+let cardOrder = VOCAB.map((_, i) => i);
+function renderCards() {
+  const box = $("#cards");
+  box.innerHTML = "";
+  cardOrder.forEach((i) => {
+    const v = VOCAB[i];
+    const btn = el("button", "card");
+    btn.type = "button";
+    btn.setAttribute("aria-label", v.term + ". Tap to show definition.");
+    const inner = el("div", "card-inner");
+    const front = el("div", "face front");
+    front.append(el("span", "term", v.term), el("span", "hint", "Tap to flip"));
+    const back = el("div", "face back");
+    back.setAttribute("aria-hidden", "true");
+    back.append(el("span", null, v.def), el("span", "hint", v.term));
+    inner.append(front, back);
+    btn.append(inner);
+    btn.addEventListener("click", () => {
+      const flipped = btn.classList.toggle("flipped");
+      back.setAttribute("aria-hidden", String(!flipped));
+      front.setAttribute("aria-hidden", String(flipped));
+      btn.setAttribute("aria-label", flipped ? v.term + ": " + v.def : v.term + ". Tap to show definition.");
+    });
+    box.append(btn);
+  });
+}
+$("#shuffle-cards").addEventListener("click", () => { cardOrder = shuffle(cardOrder); renderCards(); });
+$("#reset-cards").addEventListener("click", renderCards);
+
+/* ---------- Quiz ---------- */
+function distractors(i) {
+  const v = VOCAB[i];
+  let pool = VOCAB.filter((x, j) => j !== i && x.g === v.g).map((x) => x.term);
+  if (pool.length < 3) {
+    const extra = VOCAB.filter((x, j) => j !== i && (RELATED[v.g] || []).includes(x.g)).map((x) => x.term);
+    pool = pool.concat(shuffle(extra));
+  }
+  return shuffle(pool.slice(0, Math.max(3, pool.length))).slice(0, 3);
+}
+
+const state = { order: [], opts: {}, picks: {}, submitted: false, isFull: true, lastCorrect: 0 };
+
+function startQuiz(ids, isFull) {
+  state.order = shuffle(ids);
+  state.opts = {};
+  ids.forEach((i) => { state.opts[i] = shuffle([VOCAB[i].term].concat(distractors(i))); });
+  state.picks = {};
+  state.submitted = false;
+  state.isFull = isFull;
+  $("#results").hidden = true;
+  $("#submit-note").hidden = true;
+  $("#submit-quiz").hidden = false;
+  renderQuiz();
+  updateProgress();
+}
+
+function renderQuiz() {
+  const box = $("#questions");
+  box.innerHTML = "";
+  const total = state.order.length;
+  state.order.forEach((qi, n) => {
+    const v = VOCAB[qi];
+    const fs = el("fieldset", "q");
+    fs.id = "q-" + qi;
+    const lg = el("legend");
+    lg.append(el("span", "qnum", "Question " + (n + 1) + " of " + total), el("span", "prompt", v.def));
+    fs.append(lg);
+    const opts = el("div", "opts");
+    state.opts[qi].forEach((opt) => {
+      const lab = el("label", "opt");
+      const inp = document.createElement("input");
+      inp.type = "radio";
+      inp.name = "q" + qi;
+      inp.value = opt;
+      inp.addEventListener("change", () => {
+        state.picks[qi] = opt;
+        fs.classList.remove("missing");
+        updateProgress();
+      });
+      lab.append(inp, el("span", null, opt));
+      opts.append(lab);
+    });
+    fs.append(opts);
+    const fb = el("div", "feedback");
+    fb.hidden = true;
+    fs.append(fb);
+    box.append(fs);
+  });
+}
+
+function updateProgress() {
+  const total = state.order.length;
+  const done = state.order.filter((i) => state.picks[i] != null).length;
+  $("#progress-text").textContent = state.submitted
+    ? "Submitted: " + state.lastCorrect + " of " + total + " correct"
+    : done + " of " + total + " answered";
+  $("#progress-bar").style.width = (total ? (done / total) * 100 : 0) + "%";
+}
+
+$("#submit-quiz").addEventListener("click", () => {
+  const unanswered = state.order.filter((i) => state.picks[i] == null);
+  if (unanswered.length === 0) { grade(); return; }
+  unanswered.forEach((i) => $("#q-" + i).classList.add("missing"));
+  const note = $("#submit-note");
+  note.innerHTML = "";
+  const count = unanswered.length;
+  note.append(el("p", null, count + (count === 1 ? " question is" : " questions are") +
+    " still unanswered (outlined in gold). Unanswered questions count as wrong."));
+  const row = el("div", "btn-row");
+  const go = el("button", "btn secondary", "Go to first unanswered");
+  go.type = "button";
+  go.addEventListener("click", () => {
+    const first = document.getElementById("q-" + unanswered[0]);
+    first.scrollIntoView({ behavior: "smooth", block: "start" });
+    first.querySelector("input").focus({ preventScroll: true });
+  });
+  const anyway = el("button", "btn", "Submit anyway");
+  anyway.type = "button";
+  anyway.addEventListener("click", grade);
+  row.append(go, anyway);
+  note.append(row);
+  note.hidden = false;
+});
+
+function grade() {
+  state.submitted = true;
+  $("#submit-note").hidden = true;
+  $("#submit-quiz").hidden = true;
+  let correct = 0;
+  const missed = [];
+  state.order.forEach((qi) => {
+    const answer = VOCAB[qi].term;
+    const pick = state.picks[qi];
+    const right = pick === answer;
+    if (right) correct++; else missed.push(qi);
+    const fs = $("#q-" + qi);
+    fs.classList.remove("missing");
+    fs.classList.add("graded", right ? "is-right" : "is-wrong");
+    fs.querySelectorAll("label.opt").forEach((lab) => {
+      const inp = lab.querySelector("input");
+      inp.disabled = true;
+      if (inp.value === answer) {
+        lab.classList.add("is-answer");
+        lab.append(el("span", "tag", right ? "✓ Your answer" : "✓ Correct answer"));
+      } else if (inp.value === pick) {
+        lab.classList.add("is-wrong-pick");
+        lab.append(el("span", "tag", "✗ Your answer"));
+      }
+    });
+    const fb = fs.querySelector(".feedback");
+    fb.className = "feedback " + (right ? "good" : "bad");
+    if (right) {
+      fb.append(el("strong", null, "Correct!"));
+    } else if (pick == null) {
+      fb.append(el("strong", null, "No answer. The answer is " + answer + "."));
+    } else {
+      fb.append(el("strong", null, "Not quite. The answer is " + answer + "."));
+      fb.append(el("span", null, "You picked " + pick + ", which means: " + byTerm[pick].def));
+    }
+    fb.hidden = false;
+  });
+  state.lastCorrect = correct;
+  showResults(correct, state.order.length, missed);
+  updateProgress();
+}
+
+function showResults(correct, total, missed) {
+  const pct = Math.round((correct / total) * 100);
+  const box = $("#results");
+  box.innerHTML = "";
+  const line = el("div", "score-line");
+  line.append(el("span", "score-big", correct + "/" + total), el("span", "score-pct", pct + "% correct"));
+  box.append(line);
+  let msg;
+  if (!state.isFull && pct === 100) msg = "You got every missed question right this time. Nice recovery.";
+  else if (pct === 100) msg = "Every one right. You know this vocabulary.";
+  else if (pct >= 80) msg = "Solid work. Look over the ones you missed, then retake just those.";
+  else if (pct >= 60) msg = "Getting there. Flip through the cards for the terms you missed, then retake them.";
+  else msg = "Worth another pass. Read the feedback below, go back through the cards, and try again.";
+  box.append(el("p", null, msg));
+  if (missed.length) {
+    box.append(el("p", null, "Terms to review (tap one to jump to it):"));
+    const ul = el("ul", "missed");
+    missed.forEach((qi) => {
+      const li = el("li");
+      const b = el("button", null, VOCAB[qi].term);
+      b.type = "button";
+      b.addEventListener("click", () => document.getElementById("q-" + qi).scrollIntoView({ behavior: "smooth", block: "start" }));
+      li.append(b);
+      ul.append(li);
+    });
+    box.append(ul);
+  }
+  const row = el("div", "btn-row");
+  if (missed.length) {
+    const rm = el("button", "btn", "Retake the " + missed.length + " I missed");
+    rm.type = "button";
+    rm.addEventListener("click", () => { startQuiz(missed, false); $("#quiz").scrollIntoView({ behavior: "smooth" }); });
+    row.append(rm);
+  }
+  const ra = el("button", missed.length ? "btn secondary" : "btn", "Retake the whole quiz");
+  ra.type = "button";
+  ra.addEventListener("click", () => { startQuiz(VOCAB.map((_, i) => i), true); $("#quiz").scrollIntoView({ behavior: "smooth" }); });
+  row.append(ra);
+  box.append(row);
+  box.hidden = false;
+  box.scrollIntoView({ behavior: "smooth", block: "start" });
+  box.focus({ preventScroll: true });
+}
+
+/* ---------- Review questions ---------- */
+function renderReview() {
+  const box = $("#rq-list");
+  REVIEW.forEach((grp) => {
+    box.append(el("h3", "group-h", grp.group));
+    grp.items.forEach((item) => {
+      const card = el("div", "rq");
+      const q = el("p", "rq-q");
+      q.append(el("span", "n", item.n + "."), el("span", null, item.q));
+      card.append(q);
+      const ta = document.createElement("textarea");
+      ta.id = "rq-" + item.n;
+      ta.setAttribute("aria-label", "Your answer to question " + item.n);
+      ta.placeholder = "Type your answer…";
+      card.append(ta);
+      const btn = el("button", "btn small", "Check my answer");
+      btn.type = "button";
+      btn.setAttribute("aria-expanded", "false");
+      card.append(btn);
+      const cmp = el("div", "cmp");
+      cmp.hidden = true;
+      card.append(cmp);
+
+      const draw = () => {
+        cmp.innerHTML = "";
+        const yours = el("div", "cmp-cell cmp-yours");
+        yours.append(el("span", "cmp-label", "Your answer"));
+        const v = ta.value.trim();
+        yours.append(v ? el("div", "cmp-text", v) : el("div", "cmp-empty", "No answer yet"));
+        const guide = el("div", "cmp-cell cmp-guide");
+        guide.append(el("span", "cmp-label", "Study guide"));
+        const ul = el("ul");
+        item.a.forEach((p) => ul.append(el("li", null, p)));
+        guide.append(ul);
+        if (item.tip) guide.append(el("p", "tip", "Tip: " + item.tip));
+        cmp.append(yours, guide);
+      };
+      btn.addEventListener("click", () => {
+        const show = cmp.hidden;
+        if (show) draw();
+        cmp.hidden = !show;
+        btn.setAttribute("aria-expanded", String(show));
+        btn.textContent = show ? "Hide study guide answer" : "Check my answer";
+      });
+      ta.addEventListener("input", () => { if (!cmp.hidden) draw(); });
+      box.append(card);
+    });
+  });
+}
+
+/* ---------- Start ---------- */
+renderCards();
+startQuiz(VOCAB.map((_, i) => i), true);
+renderReview();
+</script>
+</body>
+</html>

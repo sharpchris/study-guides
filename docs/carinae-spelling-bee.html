@@ -1,0 +1,1011 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Spelling Bee Practice</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐝</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #F1F4F8;
+  --surface: #FFFFFF;
+  --ink: #17223A;
+  --muted: #59647D;
+  --line: #D4DAE4;
+  --honey: #E9A516;
+  --honey-soft: #FBEFD2;
+  --on-honey: #2A1D00;
+  --good: #1D7348;
+  --good-bg: #E1F3E8;
+  --bad: #B0281F;
+  --bad-bg: #FBE6E3;
+  --focus: #2E66D9;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  font-family: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0F141D;
+    --surface: #18202D;
+    --ink: #E7EBF2;
+    --muted: #A0AABD;
+    --line: #2C3648;
+    --honey: #F2B437;
+    --honey-soft: #3A2E12;
+    --on-honey: #241800;
+    --good: #67CF97;
+    --good-bg: #16301F;
+    --bad: #F28C83;
+    --bad-bg: #3B1C1A;
+    --focus: #7EA6FF;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0F141D; --surface: #18202D; --ink: #E7EBF2; --muted: #A0AABD; --line: #2C3648;
+  --honey: #F2B437; --honey-soft: #3A2E12; --on-honey: #241800;
+  --good: #67CF97; --good-bg: #16301F; --bad: #F28C83; --bad-bg: #3B1C1A; --focus: #7EA6FF;
+}
+*, *::before, *::after { box-sizing: inherit; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+h1, h2, h3 { line-height: 1.2; margin: 0 0 .75rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.125rem; margin-top: 1.75rem; }
+p { margin: 0 0 1rem; }
+a { color: var(--focus); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+[hidden] { display: none !important; }
+
+/* Header */
+.top {
+  max-width: 42rem; margin: 0 auto; padding: 1rem 1rem .5rem;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem;
+}
+.brand { font-size: 1.2rem; font-weight: 700; margin: 0; display: flex; align-items: center; gap: .5rem; }
+.brand-hex {
+  width: 1.1rem; height: 1.27rem; background: var(--honey);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+.nav { display: flex; gap: .25rem; }
+.nav button {
+  font: inherit; font-size: 1rem; background: none; border: 0; color: var(--muted);
+  padding: .5rem .7rem; border-radius: 8px; cursor: pointer; min-height: 44px;
+}
+.nav button[aria-current="page"] { color: var(--ink); font-weight: 700; background: var(--surface); }
+
+main { max-width: 42rem; margin: 0 auto; padding: .5rem 1rem 3rem; }
+.panel {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+  padding: 1.5rem;
+}
+@media (max-width: 480px) { .panel { padding: 1.15rem; } }
+
+.banner {
+  background: var(--honey-soft); border: 1px solid var(--honey); color: var(--ink);
+  border-radius: 12px; padding: .8rem 1rem; margin-bottom: 1rem;
+}
+
+/* Buttons and fields */
+.btn {
+  font: inherit; font-size: 1rem; line-height: 1.2;
+  display: inline-flex; align-items: center; justify-content: center; gap: .45rem;
+  padding: .7rem 1.1rem; min-height: 44px;
+  border: 1px solid var(--line); border-radius: 10px;
+  background: var(--surface); color: var(--ink); cursor: pointer; text-decoration: none;
+}
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--ink); border-color: var(--ink); color: var(--surface); font-weight: 700; }
+.btn.primary:hover { opacity: .92; }
+.btn.quiet { border-color: transparent; background: none; color: var(--muted); }
+.btn.danger { color: var(--bad); }
+.btn svg { width: 1.1em; height: 1.1em; flex: none; }
+.row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
+label.field { display: block; font-weight: 700; margin-bottom: 1rem; }
+label.field > span.hintline { display: block; font-weight: 400; color: var(--muted); font-size: .95rem; }
+input[type="number"], input[type="search"], input[type="text"], select {
+  font: inherit; font-size: 1rem; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 10px; padding: .6rem .75rem; min-height: 44px;
+  width: 100%; margin-top: .35rem;
+}
+fieldset { border: 0; padding: 0; margin: 0 0 1.25rem; }
+legend { font-weight: 700; padding: 0; margin-bottom: .4rem; }
+.choices { display: flex; flex-wrap: wrap; gap: .5rem; }
+.choices label {
+  display: inline-flex; align-items: center; gap: .5rem; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 10px; padding: .55rem .85rem; min-height: 44px;
+}
+.choices label:has(input:checked) { border-color: var(--ink); background: var(--bg); font-weight: 700; }
+.choices input { accent-color: var(--ink); width: 1.1rem; height: 1.1rem; margin: 0; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem; }
+.muted { color: var(--muted); }
+.small { font-size: .95rem; }
+.status { min-height: 1.5em; color: var(--bad); font-weight: 700; }
+.status.ok { color: var(--good); }
+
+/* Load */
+.dropzone { border: 2px dashed var(--line); border-radius: 14px; padding: 1.5rem; text-align: center; margin: 1rem 0; }
+.dropzone.over { border-color: var(--honey); background: var(--honey-soft); }
+
+/* Practice */
+.progressline { display: flex; justify-content: space-between; color: var(--muted); font-size: .95rem; margin-bottom: .4rem; }
+.bar { height: 6px; background: var(--bg); border-radius: 3px; overflow: hidden; margin-bottom: 1.5rem; }
+.bar > div { height: 100%; width: 0; background: var(--honey); transition: width .3s ease; }
+
+.say-wrap { display: flex; flex-direction: column; align-items: center; gap: .75rem; margin-bottom: 1.25rem; }
+.hexbtn { background: none; border: 0; padding: 6px; border-radius: 22px; cursor: pointer; color: var(--on-honey); }
+.hex {
+  width: 140px; height: 162px; background: var(--honey);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .35rem;
+  font-weight: 700; font-size: 1.05rem;
+  transition: transform .15s ease;
+}
+.hex svg { width: 46px; height: 46px; }
+.hexbtn:hover .hex { transform: scale(1.03); }
+.hexbtn:active .hex { transform: scale(.97); }
+.hexbtn.speaking .hex { animation: hum 1s ease-in-out infinite; }
+@keyframes hum { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+@media (prefers-reduced-motion: reduce) {
+  .hexbtn.speaking .hex { animation: none; }
+  .hex, .bar > div { transition: none; }
+}
+
+.clue { border-top: 1px solid var(--line); padding-top: 1.1rem; margin-bottom: 1.25rem; }
+.pos { font-style: italic; color: var(--muted); margin: 0 0 .25rem; }
+.def { font-size: 1.2rem; margin: 0; max-width: 36em; }
+.blank { display: inline-block; min-width: 3.5em; border-bottom: 2px solid var(--muted); height: 1em; vertical-align: baseline; }
+
+.answer {
+  font: inherit; font-size: 1.6rem; letter-spacing: .03em; color: var(--ink);
+  width: 100%; padding: .65rem .9rem; margin: 0 0 .75rem;
+  border: 2px solid var(--line); border-radius: 12px; background: var(--surface);
+}
+.answer:focus { border-color: var(--focus); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 30%, transparent); }
+.answer[readonly] { background: var(--bg); }
+.hint { color: var(--muted); font-size: .95rem; margin: .75rem 0 0; }
+
+.result { margin-top: 1.25rem; }
+.verdict { font-size: 1.35rem; font-weight: 700; margin: 0 0 .75rem; }
+.verdict.good { color: var(--good); }
+.verdict.bad { color: var(--bad); }
+.rowlabel { font-size: .95rem; color: var(--muted); margin: .75rem 0 .35rem; }
+.tiles { display: flex; flex-wrap: wrap; gap: .3rem; }
+.tile {
+  min-width: clamp(1.7rem, 7vw, 2.2rem); height: clamp(2.2rem, 9vw, 2.7rem); padding: 0 .2rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 2px solid var(--line); border-radius: 7px; background: var(--surface);
+  font-size: clamp(1.1rem, 5vw, 1.4rem); font-weight: 700;
+}
+.tile.ok { border-color: var(--good); background: var(--good-bg); }
+.tile.miss { border-color: var(--bad); background: var(--bad-bg); color: var(--bad); }
+.tile.gap { border: 0; background: none; min-width: .7rem; }
+.after { margin-top: 1.25rem; }
+.endrow { margin-top: 1.5rem; border-top: 1px solid var(--line); padding-top: .75rem; }
+
+/* Summary */
+.bigscore { font-size: 2.2rem; font-weight: 700; margin: 0 0 .25rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .4rem; margin: .5rem 0 1.25rem; padding: 0; list-style: none; }
+.chips li { background: var(--bad-bg); color: var(--bad); border-radius: 999px; padding: .3rem .8rem; font-weight: 700; }
+
+/* Word list */
+.wrows { margin-top: 1rem; }
+.wrow {
+  display: grid; grid-template-columns: 3.2rem 1fr auto; gap: .35rem .75rem; align-items: center;
+  padding: .75rem 0; border-top: 1px solid var(--line);
+}
+.wn { color: var(--muted); font-size: .95rem; }
+.wword strong { font-size: 1.1rem; }
+.wmeta { display: block; color: var(--muted); font-size: .9rem; }
+.wrow input { grid-column: 2 / 4; margin-top: 0; }
+@media (max-width: 480px) {
+  .wrow { grid-template-columns: 1fr auto; }
+  .wn { grid-column: 1 / 3; }
+  .wrow input { grid-column: 1 / 3; }
+}
+.range-out { font-weight: 400; color: var(--muted); }
+input[type="range"] { width: 100%; accent-color: var(--honey); min-height: 44px; }
+.check { display: flex; gap: .6rem; align-items: flex-start; margin-bottom: 1rem; cursor: pointer; }
+.check input { width: 1.2rem; height: 1.2rem; margin-top: .2rem; accent-color: var(--ink); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <p class="brand"><span class="brand-hex" aria-hidden="true"></span>Spelling Bee Practice</p>
+  <nav class="nav" aria-label="Main">
+    <button type="button" data-nav="setupView" id="navPractice">Practice</button>
+    <button type="button" data-nav="listView" id="navList">Word list</button>
+    <button type="button" data-nav="settingsView" id="navSettings">Settings</button>
+  </nav>
+</header>
+
+<main>
+  <div class="banner" id="noSpeech" hidden>This browser can’t speak words out loud. Open this page in Chrome, Edge, or Safari to hear the words.</div>
+
+  <!-- Load list -->
+  <section id="loadView" class="panel" hidden>
+    <h2>Load your word list</h2>
+    <p>This page doesn’t include any words. Choose your <strong>words.json</strong> file and it will be saved in this browser, so you only need to do this once on each device.</p>
+    <div class="dropzone" id="dropzone">
+      <label class="btn primary">
+        Choose word list file
+        <input type="file" id="fileInput" accept=".json,application/json" class="sr-only">
+      </label>
+      <p class="muted small" style="margin:.75rem 0 0">Or drag the file here.</p>
+    </div>
+    <p class="status" id="loadMsg" role="status"></p>
+  </section>
+
+  <!-- Setup -->
+  <section id="setupView" class="panel" hidden>
+    <h2>Start a practice session</h2>
+    <p class="muted" id="stats"></p>
+
+    <fieldset>
+      <legend>Which part of the list</legend>
+      <div class="choices" id="quickRanges"></div>
+      <p class="muted small" style="margin:.5rem 0 0">The words get harder as the numbers go up.</p>
+    </fieldset>
+    <div class="two">
+      <label class="field">From word #<input type="number" id="fromN" inputmode="numeric"></label>
+      <label class="field">To word #<input type="number" id="toN" inputmode="numeric"></label>
+    </div>
+
+    <label class="field">How many words
+      <select id="count">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+        <option value="all">All of them</option>
+      </select>
+    </label>
+
+    <fieldset>
+      <legend>Which words</legend>
+      <div class="choices">
+        <label><input type="radio" name="pool" value="all"> Every word in that range</label>
+        <label><input type="radio" name="pool" value="missed"> Ones I missed last time</label>
+        <label><input type="radio" name="pool" value="new"> Ones I haven’t tried yet</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Order</legend>
+      <div class="choices">
+        <label><input type="radio" name="order" value="shuffle"> Mixed up</label>
+        <label><input type="radio" name="order" value="list"> In list order</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>How to answer</legend>
+      <div class="choices">
+        <label><input type="radio" name="mode" value="type"> Type the spelling</label>
+        <label><input type="radio" name="mode" value="oral"> Spell it out loud to a helper</label>
+      </div>
+    </fieldset>
+
+    <div class="row">
+      <button type="button" class="btn primary" id="startBtn">Start practicing</button>
+    </div>
+    <p class="status" id="startMsg" role="status" style="margin-top:.75rem"></p>
+  </section>
+
+  <!-- Practice -->
+  <section id="practiceView" class="panel" hidden>
+    <div class="progressline"><span id="counter">Word 1 of 10</span><span id="score">0 right</span></div>
+    <div class="bar" aria-hidden="true"><div id="barfill"></div></div>
+
+    <div class="say-wrap">
+      <button type="button" class="hexbtn" id="sayBtn" aria-label="Hear the word">
+        <span class="hex">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+          Hear word
+        </span>
+      </button>
+      <div class="row" style="justify-content:center">
+        <button type="button" class="btn" id="slowBtn">Say it slowly</button>
+        <button type="button" class="btn" id="defBtn">Read the definition</button>
+      </div>
+      <p class="hint" id="slowHint" hidden style="text-align:center;max-width:28rem">This voice doesn’t seem to slow down. In Settings, try a different voice or turn the slow speed down further.</p>
+    </div>
+
+    <div class="clue">
+      <p class="pos" id="pos"></p>
+      <p class="def" id="def"></p>
+    </div>
+
+    <div id="typeArea">
+      <label for="answer" class="sr-only">Type your spelling</label>
+      <input id="answer" class="answer" type="text" name="sbp-answer-field"
+        autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+        data-gramm="false" data-1p-ignore data-lpignore="true" enterkeyhint="go" placeholder="Type the word">
+      <div class="row" id="typeActions">
+        <button type="button" class="btn primary" id="checkBtn">Check spelling</button>
+        <button type="button" class="btn quiet" id="revealBtn">Show answer</button>
+      </div>
+      <p class="hint" id="typeHint">Press Enter to check. Press Enter on an empty box to hear the word again.</p>
+    </div>
+
+    <div id="oralArea" hidden>
+      <p class="muted">Spell the word out loud, then the helper checks it.</p>
+      <button type="button" class="btn primary" id="showSpellBtn">Show spelling</button>
+    </div>
+
+    <div class="result" id="result" aria-live="polite"></div>
+
+    <div class="after row" id="oralMark" hidden>
+      <button type="button" class="btn primary" id="rightBtn">Spelled it right</button>
+      <button type="button" class="btn" id="missBtn">Missed it</button>
+    </div>
+    <div class="after row" id="afterRow" hidden>
+      <button type="button" class="btn primary" id="nextBtn">Next word</button>
+    </div>
+    <p class="small" id="mwWrap" hidden style="margin:1rem 0 0"><a id="mwLink" href="#" target="_blank" rel="noopener">Hear the official pronunciation on Merriam-Webster</a></p>
+
+    <div class="endrow">
+      <button type="button" class="btn quiet" id="endBtn">End session</button>
+    </div>
+  </section>
+
+  <!-- Summary -->
+  <section id="summaryView" class="panel" hidden>
+    <h2>Session finished</h2>
+    <p class="bigscore" id="sumScore"></p>
+    <p class="muted" id="sumLine"></p>
+    <div id="sumMissed"></div>
+    <div class="row">
+      <button type="button" class="btn primary" id="againBtn">Practice the missed words</button>
+      <button type="button" class="btn" id="newBtn">Start a new session</button>
+    </div>
+  </section>
+
+  <!-- Word list -->
+  <section id="listView" class="panel" hidden>
+    <h2>Word list</h2>
+    <p>This page shows every spelling, so it’s meant for a parent or coach. Press Play to hear how a word sounds. If it sounds wrong, type how it should be said (for example “doo en day”) and that will be used from now on. Clear the box to go back to the default.</p>
+    <label class="field">Find a word<input type="search" id="filter" placeholder="Type a word or number"></label>
+    <p class="muted small" id="listCount"></p>
+    <div class="wrows" id="wordRows"></div>
+  </section>
+
+  <!-- Settings -->
+  <section id="settingsView" class="panel" hidden>
+    <h2>Settings</h2>
+
+    <h3 style="margin-top:0">Voice</h3>
+    <label class="field">Voice
+      <span class="hintline">Voices with “Natural” or “Enhanced” in the name usually sound best.</span>
+      <select id="voiceSel"></select>
+    </label>
+    <label class="field">Speaking speed <span class="range-out" id="rateOut"></span>
+      <input type="range" id="rate" min="0.5" max="1.3" step="0.05">
+    </label>
+    <label class="field">“Say it slowly” speed <span class="range-out" id="slowOut"></span>
+      <span class="hintline">Lower is slower. Some voices, especially online ones, ignore speed changes; if slow sounds the same as normal, pick a different voice.</span>
+      <input type="range" id="slowRate" min="0.1" max="0.9" step="0.05">
+    </label>
+    <label class="check"><input type="checkbox" id="readDef"> <span>Read the definition aloud after each word</span></label>
+    <div class="row">
+      <button type="button" class="btn" id="testVoice">Test this voice</button>
+      <button type="button" class="btn" id="testSlow">Compare normal and slow</button>
+    </div>
+
+    <h3>Word list</h3>
+    <p class="muted" id="listInfo"></p>
+    <div class="row">
+      <label class="btn">
+        Load a different list
+        <input type="file" id="fileInput2" accept=".json,application/json" class="sr-only">
+      </label>
+      <button type="button" class="btn danger" id="removeList">Remove list from this device</button>
+    </div>
+    <p class="status" id="settingsMsg" role="status" style="margin-top:.75rem"></p>
+
+    <h3>Practice history</h3>
+    <p class="muted">Clearing history resets which words count as missed or not tried yet. Your word list and pronunciation fixes stay.</p>
+    <button type="button" class="btn danger" id="clearProgress">Clear practice history</button>
+  </section>
+</main>
+
+<script>
+(() => {
+  'use strict';
+
+  const KEYS = { words: 'sbp.words.v1', progress: 'sbp.progress.v1', settings: 'sbp.settings.v1', say: 'sbp.say.v1' };
+  const $ = (id) => document.getElementById(id);
+
+  function load(key, fallback) {
+    try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch (e) { return fallback; }
+  }
+  function store(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch (e) { return false; }
+  }
+  function forget(key) { try { localStorage.removeItem(key); } catch (e) { /* ignore */ } }
+
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const escRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  let list = load(KEYS.words, null);
+  let progress = load(KEYS.progress, {});
+  let sayAs = load(KEYS.say, {});
+  const settings = Object.assign(
+    { voice: '', rate: 0.9, slow: 0.45, readDef: false, from: null, to: null, count: '20', order: 'shuffle', pool: 'all', mode: 'type' },
+    load(KEYS.settings, {})
+  );
+  const saveSettings = () => store(KEYS.settings, settings);
+  if (list && (!Array.isArray(list.words) || !list.words.length)) list = null;
+
+  const keyOf = (w) => w.word.toLowerCase();
+
+  /* ---------- Text helpers ---------- */
+  function norm(s) {
+    return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[\u2018\u2019\u02BC`]/g, "'")
+      .replace(/[\u2010-\u2015]/g, '-')
+      .toLowerCase().replace(/\s+/g, ' ').replace(/\s*-\s*/g, '-').trim();
+  }
+  const baseChar = (ch) => ch.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const formsOf = (w) => [w.word, ...(w.alts || [])];
+
+  function maskedDefHTML(w) {
+    let html = esc(w.def);
+    const forms = formsOf(w).sort((a, b) => b.length - a.length);
+    for (const f of forms) {
+      const re = new RegExp('(^|[^\\p{L}])(' + escRe(esc(f)) + ')(?=[^\\p{L}]|$)', 'giu');
+      html = html.replace(re, (m, pre) => pre + '<span class="blank" role="img" aria-label="blank"></span>');
+    }
+    return html;
+  }
+  function maskedDefText(w) {
+    let t = w.def;
+    for (const f of formsOf(w).sort((a, b) => b.length - a.length)) {
+      const re = new RegExp('(^|[^\\p{L}])(' + escRe(f) + ')(?=[^\\p{L}]|$)', 'giu');
+      t = t.replace(re, (m, pre) => pre + 'blank');
+    }
+    return t.replace(/ : /g, ', ').replace(/^—\s*/, '');
+  }
+
+  function lcsFlags(a, b) {
+    const n = a.length, m = b.length;
+    const dp = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+    for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--)
+      dp[i][j] = a[i] === b[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+    const fa = new Array(n).fill(false), fb = new Array(m).fill(false);
+    let i = 0, j = 0;
+    while (i < n && j < m) {
+      if (a[i] === b[j]) { fa[i] = fb[j] = true; i++; j++; }
+      else if (dp[i + 1][j] >= dp[i][j + 1]) i++;
+      else j++;
+    }
+    return [fa, fb];
+  }
+  function editDistance(a, b) {
+    const d = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+    for (let j = 1; j <= b.length; j++) d[0][j] = j;
+    for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++)
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    return d[a.length][b.length];
+  }
+  function tilesHTML(chars, flags, label) {
+    return '<div class="tiles" role="img" aria-label="' + esc(label) + '">' + chars.map((c, i) => {
+      if (c === ' ') return '<span class="tile gap"></span>';
+      const cls = flags ? (flags[i] ? 'ok' : 'miss') : 'ok';
+      return '<span class="tile ' + cls + '" aria-hidden="true">' + esc(c) + '</span>';
+    }).join('') + '</div>';
+  }
+  const spelledOut = (s) => Array.from(s).map((c) => (c === ' ' ? 'space' : c === '-' ? 'hyphen' : c)).join(' ');
+
+  /* ---------- Speech ---------- */
+  const canSpeak = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+  let voices = [];
+  let utterances = [];
+
+  function refreshVoices() {
+    if (!canSpeak) return;
+    const all = speechSynthesis.getVoices();
+    voices = all.filter((v) => /^en([-_]|$)/i.test(v.lang));
+    if (!voices.length) voices = all;
+    fillVoiceSelect();
+  }
+  function bestVoice() {
+    if (settings.voice) {
+      const chosen = voices.find((v) => v.voiceURI === settings.voice);
+      if (chosen) return chosen;
+    }
+    const us = (v) => /en[-_]US/i.test(v.lang);
+    const prefs = [/natural/i, /enhanced|premium/i, /samantha/i, /google us english/i, /\b(aria|jenny|ava|allison|zoe)\b/i];
+    for (const p of prefs) {
+      const v = voices.find((x) => p.test(x.name) && us(x)) || voices.find((x) => p.test(x.name));
+      if (v) return v;
+    }
+    return voices.find((v) => us(v) && v.localService) || voices.find(us) || voices[0] || null;
+  }
+  function setSpeaking(on) { $('sayBtn').classList.toggle('speaking', on); }
+  function speak(parts) {
+    if (!canSpeak || !parts.length) return;
+    speechSynthesis.cancel();
+    const voice = bestVoice();
+    utterances = parts.map((p, idx) => {
+      const u = new SpeechSynthesisUtterance(p.text);
+      if (voice) { u.voice = voice; u.lang = voice.lang; } else { u.lang = 'en-US'; }
+      u.rate = p.rate;
+      let t0 = 0;
+      u.onstart = () => { t0 = performance.now(); setSpeaking(true); };
+      u.onerror = () => { if (idx === parts.length - 1) setSpeaking(false); };
+      u.onend = () => {
+        if (idx === parts.length - 1) setSpeaking(false);
+        if (t0 && p.tag) noteDuration(p.tag, p.text, performance.now() - t0);
+      };
+      return u;
+    });
+    utterances.forEach((u) => speechSynthesis.speak(u));
+  }
+  // Some voices ignore the speed setting. Compare how long the same word takes
+  // at normal and slow speed, and say so if slow isn't clearly longer.
+  const timings = {};
+  let slowWarned = false;
+  function noteDuration(tag, text, ms) {
+    const t = timings[text] || (timings[text] = {});
+    t[tag] = ms;
+    if (slowWarned || !t.normal || !t.slow) return;
+    if (t.slow < t.normal * 1.2) {
+      slowWarned = true;
+      const h = $('slowHint');
+      if (h) h.hidden = false;
+    }
+  }
+  const spokenForm = (w) => sayAs[keyOf(w)] || w.say || w.word;
+  const slowRate = () => Math.min(settings.slow, settings.rate);
+
+  /* ---------- Views ---------- */
+  const VIEWS = ['loadView', 'setupView', 'practiceView', 'summaryView', 'listView', 'settingsView'];
+  let session = null;
+
+  function show(id) {
+    if (id !== 'practiceView' && canSpeak) speechSynthesis.cancel();
+    VIEWS.forEach((v) => { $(v).hidden = v !== id; });
+    const navFor = { setupView: 'setupView', practiceView: 'setupView', summaryView: 'setupView', loadView: 'setupView', listView: 'listView', settingsView: 'settingsView' }[id];
+    document.querySelectorAll('[data-nav]').forEach((b) => b.setAttribute('aria-current', b.dataset.nav === navFor ? 'page' : 'false'));
+    $('navList').hidden = !list;
+    window.scrollTo(0, 0);
+  }
+
+  document.querySelectorAll('[data-nav]').forEach((b) => b.addEventListener('click', () => {
+    const target = b.dataset.nav;
+    if (target === 'setupView') {
+      if (!list) return show('loadView');
+      if (session && !session.done) return show('practiceView');
+      initSetup(); return show('setupView');
+    }
+    if (target === 'listView') { renderList(); return show('listView'); }
+    if (target === 'settingsView') { initSettings(); return show('settingsView'); }
+  }));
+
+  /* ---------- Loading a list ---------- */
+  function parseList(text) {
+    const data = JSON.parse(text);
+    const arr = Array.isArray(data) ? data : data && data.words;
+    if (!Array.isArray(arr) || !arr.length) throw new Error('That file doesn’t contain a word list. Choose the words.json file.');
+    const words = arr.map((w, i) => ({
+      n: w && w.n != null && Number.isFinite(Number(w.n)) ? Number(w.n) : i + 1,
+      word: String((w && w.word) || '').trim(),
+      alts: w && Array.isArray(w.alts) ? w.alts.map(String) : [],
+      pos: String((w && w.pos) || ''),
+      def: String((w && w.def) || ''),
+      say: w && w.say ? String(w.say) : '',
+      note: w && w.note ? String(w.note) : ''
+    })).filter((w) => w.word);
+    if (!words.length) throw new Error('That file doesn’t contain any words.');
+    words.sort((a, b) => a.n - b.n);
+    return { title: String((data && data.title) || 'Word list'), words };
+  }
+  function handleFile(file, msgEl) {
+    if (!file) return;
+    msgEl.className = 'status';
+    msgEl.textContent = '';
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = parseList(String(reader.result));
+        list = parsed;
+        session = null;
+        const saved = store(KEYS.words, parsed);
+        initSetup();
+        show('setupView');
+        if (!saved) {
+          $('startMsg').textContent = 'The list loaded, but this browser wouldn’t save it. You’ll need to load it again next time.';
+        }
+      } catch (e) {
+        msgEl.textContent = e instanceof SyntaxError ? 'That file isn’t a valid word list. Choose the words.json file.' : e.message;
+      }
+    };
+    reader.onerror = () => { msgEl.textContent = 'The file couldn’t be read. Try choosing it again.'; };
+    reader.readAsText(file);
+  }
+  $('fileInput').addEventListener('change', (e) => { handleFile(e.target.files[0], $('loadMsg')); e.target.value = ''; });
+  $('fileInput2').addEventListener('change', (e) => { handleFile(e.target.files[0], $('settingsMsg')); e.target.value = ''; });
+  const dz = $('dropzone');
+  ['dragenter', 'dragover'].forEach((t) => dz.addEventListener(t, (e) => { e.preventDefault(); dz.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach((t) => dz.addEventListener(t, () => dz.classList.remove('over')));
+  dz.addEventListener('drop', (e) => { e.preventDefault(); handleFile(e.dataTransfer.files[0], $('loadMsg')); });
+
+  /* ---------- Setup ---------- */
+  function rangeBounds() {
+    const ns = list.words.map((w) => w.n);
+    return [Math.min(...ns), Math.max(...ns)];
+  }
+  function initSetup() {
+    if (!list) return;
+    const [lo, hi] = rangeBounds();
+    const clamp = (v, d) => (Number.isFinite(v) && v >= lo && v <= hi ? v : d);
+    settings.from = clamp(settings.from, lo);
+    settings.to = clamp(settings.to, hi);
+    ['fromN', 'toN'].forEach((id) => { $(id).min = lo; $(id).max = hi; });
+    $('fromN').value = settings.from;
+    $('toN').value = settings.to;
+    $('count').value = settings.count;
+    ['pool', 'order', 'mode'].forEach((name) => {
+      document.querySelectorAll('input[name="' + name + '"]').forEach((r) => { r.checked = r.value === settings[name]; });
+    });
+
+    // Quick ranges: thirds of the list
+    const ws = list.words, L = ws.length;
+    const cut1 = ws[Math.max(0, Math.floor(L / 3) - 1)].n, cut2 = ws[Math.max(0, Math.floor((2 * L) / 3) - 1)].n;
+    const ranges = L >= 9
+      ? [['Easier', lo, cut1], ['Middle', ws[Math.floor(L / 3)].n, cut2], ['Harder', ws[Math.floor((2 * L) / 3)].n, hi], ['Whole list', lo, hi]]
+      : [['Whole list', lo, hi]];
+    $('quickRanges').innerHTML = ranges.map(([label, a, b]) =>
+      '<button type="button" class="btn" data-a="' + a + '" data-b="' + b + '">' + esc(label) + ' <span class="muted">' + a + '–' + b + '</span></button>'
+    ).join('');
+
+    const practiced = ws.filter((w) => progress[keyOf(w)]).length;
+    const missed = ws.filter((w) => progress[keyOf(w)] && progress[keyOf(w)].last === false).length;
+    $('stats').textContent = ws.length + ' words loaded (#' + lo + ' to #' + hi + '). ' +
+      (practiced ? 'Practiced ' + practiced + ' so far, and ' + missed + (missed === 1 ? ' is' : ' are') + ' on the missed list.' : 'No words practiced yet.');
+    $('startMsg').textContent = '';
+  }
+  $('quickRanges').addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-a]');
+    if (!b) return;
+    settings.from = +b.dataset.a; settings.to = +b.dataset.b; saveSettings();
+    $('fromN').value = settings.from; $('toN').value = settings.to;
+  });
+  $('fromN').addEventListener('change', () => { settings.from = parseInt($('fromN').value, 10); saveSettings(); });
+  $('toN').addEventListener('change', () => { settings.to = parseInt($('toN').value, 10); saveSettings(); });
+  $('count').addEventListener('change', () => { settings.count = $('count').value; saveSettings(); });
+  ['pool', 'order', 'mode'].forEach((name) => {
+    document.querySelectorAll('input[name="' + name + '"]').forEach((r) => r.addEventListener('change', () => {
+      if (r.checked) { settings[name] = r.value; saveSettings(); }
+    }));
+  });
+
+  function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+    return a;
+  }
+  $('startBtn').addEventListener('click', () => {
+    const [lo, hi] = rangeBounds();
+    let a = parseInt($('fromN').value, 10), b = parseInt($('toN').value, 10);
+    if (!Number.isFinite(a)) a = lo;
+    if (!Number.isFinite(b)) b = hi;
+    if (a > b) [a, b] = [b, a];
+    settings.from = a; settings.to = b; saveSettings();
+    let pool = list.words.filter((w) => w.n >= a && w.n <= b);
+    if (!pool.length) { $('startMsg').textContent = 'No words are numbered ' + a + ' to ' + b + '. This list runs from ' + lo + ' to ' + hi + '.'; return; }
+    if (settings.pool === 'missed') {
+      pool = pool.filter((w) => progress[keyOf(w)] && progress[keyOf(w)].last === false);
+      if (!pool.length) { $('startMsg').textContent = 'No missed words in that range. Choose “Every word in that range” to keep practicing.'; return; }
+    } else if (settings.pool === 'new') {
+      pool = pool.filter((w) => !progress[keyOf(w)]);
+      if (!pool.length) { $('startMsg').textContent = 'Every word in that range has been tried. Choose “Every word in that range” to keep practicing.'; return; }
+    }
+    pool = settings.order === 'shuffle' ? shuffle(pool.slice()) : pool.slice().sort((x, y) => x.n - y.n);
+    const count = settings.count === 'all' ? pool.length : Math.min(parseInt(settings.count, 10), pool.length);
+    startSession(pool.slice(0, count), settings.mode);
+  });
+
+  /* ---------- Practice ---------- */
+  function startSession(queue, mode) {
+    session = { queue, i: 0, results: [], answered: false, mode, done: false };
+    show('practiceView');
+    showWord();
+  }
+  const current = () => session.queue[session.i];
+  const rightCount = () => session.results.filter((r) => r.ok).length;
+
+  function sayCurrent(rate) {
+    const w = current();
+    const r = rate || settings.rate;
+    speak([{ text: spokenForm(w), rate: r, tag: rate ? 'slow' : 'normal' }]);
+  }
+
+  function showWord() {
+    const w = current();
+    session.answered = false;
+    $('counter').textContent = 'Word ' + (session.i + 1) + ' of ' + session.queue.length;
+    $('score').textContent = rightCount() + ' right';
+    $('barfill').style.width = (session.i / session.queue.length * 100) + '%';
+    $('pos').textContent = w.pos;
+    $('def').innerHTML = maskedDefHTML(w);
+    $('result').innerHTML = '';
+    $('afterRow').hidden = true;
+    $('oralMark').hidden = true;
+    $('mwWrap').hidden = true;
+    $('nextBtn').textContent = session.i === session.queue.length - 1 ? 'See results' : 'Next word';
+
+    const typing = session.mode === 'type';
+    $('typeArea').hidden = !typing;
+    $('oralArea').hidden = typing;
+    $('showSpellBtn').hidden = false;
+    if (typing) {
+      const a = $('answer');
+      a.value = '';
+      a.readOnly = false;
+      $('typeActions').hidden = false;
+      $('typeHint').hidden = false;
+      a.focus({ preventScroll: true });
+    }
+
+    const parts = [{ text: spokenForm(w), rate: settings.rate, tag: 'normal' }];
+    if (settings.readDef) parts.push({ text: maskedDefText(w), rate: settings.rate });
+    speak(parts);
+  }
+
+  function record(w, ok) {
+    const k = keyOf(w);
+    const p = progress[k] || { a: 0, c: 0 };
+    p.a += 1; if (ok) p.c += 1;
+    p.last = ok; p.t = Date.now();
+    progress[k] = p;
+    store(KEYS.progress, progress);
+    session.results.push({ w, ok });
+    $('score').textContent = rightCount() + ' right';
+  }
+
+  function alsoAccepted(w, usedForm) {
+    const others = formsOf(w).filter((f) => f !== usedForm);
+    if (!others.length) return '';
+    let s = '<p class="muted small" style="margin-top:.75rem">Also accepted: ' + others.map(esc).join(', ') + '.';
+    if (w.note) s += ' (' + esc(w.note.charAt(0).toUpperCase() + w.note.slice(1)) + '.)';
+    return s + '</p>';
+  }
+
+  function checkTyped(giveUp) {
+    const w = current();
+    const raw = $('answer').value;
+    const attempt = norm(raw);
+    if (!giveUp && !attempt) { sayCurrent(); $('answer').focus(); return; }
+    const forms = formsOf(w);
+    const matched = giveUp ? null : forms.find((f) => norm(f) === attempt);
+    const ok = !!matched;
+    session.answered = true;
+    $('answer').readOnly = true;
+    $('typeActions').hidden = true;
+    $('typeHint').hidden = true;
+    record(w, ok);
+
+    let html = '';
+    if (ok) {
+      const chars = Array.from(matched.normalize('NFC'));
+      html += '<p class="verdict good">Correct!</p>' + tilesHTML(chars, null, 'Spelled ' + spelledOut(matched));
+      if (/[^\x00-\x7F]/.test(matched) && !/[^\x00-\x7F]/.test(raw)) {
+        html += '<p class="muted small" style="margin-top:.75rem">The dictionary spelling has an accent mark, shown above.</p>';
+      }
+      html += alsoAccepted(w, matched);
+    } else if (giveUp) {
+      const chars = Array.from(w.word.normalize('NFC'));
+      html += '<p class="verdict">The spelling is</p>' + tilesHTML(chars, null, spelledOut(w.word)) + alsoAccepted(w, w.word);
+    } else {
+      const target = forms.reduce((best, f) => (editDistance(norm(f), attempt) < editDistance(norm(best), attempt) ? f : best), forms[0]);
+      const tChars = Array.from(target.normalize('NFC'));
+      const tCmp = tChars.map(baseChar);
+      const aChars = Array.from(attempt);
+      const [fT, fA] = lcsFlags(tCmp, aChars);
+      html += '<p class="verdict bad">Not quite.</p>' +
+        '<p class="rowlabel">Correct spelling</p>' + tilesHTML(tChars, fT, 'Correct spelling: ' + spelledOut(target)) +
+        '<p class="rowlabel">You wrote</p>' + tilesHTML(aChars, fA, 'You wrote: ' + spelledOut(attempt)) +
+        alsoAccepted(w, target);
+    }
+    $('result').innerHTML = html;
+    showAfter(w);
+  }
+
+  function showAfter(w) {
+    $('afterRow').hidden = false;
+    $('mwLink').href = 'https://www.merriam-webster.com/dictionary/' + encodeURIComponent(w.word);
+    $('mwWrap').hidden = false;
+    $('nextBtn').focus({ preventScroll: true });
+  }
+
+  function nextWord() {
+    session.i += 1;
+    if (session.i >= session.queue.length) finish();
+    else showWord();
+  }
+
+  function finish() {
+    if (canSpeak) speechSynthesis.cancel();
+    if (!session) return;
+    session.done = true;
+    const total = session.results.length;
+    if (!total) { session = null; initSetup(); show('setupView'); return; }
+    const right = rightCount();
+    const missed = session.results.filter((r) => !r.ok).map((r) => r.w);
+    $('sumScore').textContent = right + ' of ' + total + ' right';
+    $('sumLine').textContent = missed.length
+      ? (missed.length === 1 ? 'One word to work on:' : missed.length + ' words to work on:')
+      : 'Every word spelled correctly.';
+    $('sumMissed').innerHTML = missed.length
+      ? '<ul class="chips">' + missed.map((w) => '<li>' + esc(w.word) + '</li>').join('') + '</ul>'
+      : '';
+    $('againBtn').hidden = !missed.length;
+    session.missed = missed;
+    show('summaryView');
+    (missed.length ? $('againBtn') : $('newBtn')).focus({ preventScroll: true });
+  }
+
+  $('sayBtn').addEventListener('click', () => { if (session) sayCurrent(); });
+  $('slowBtn').addEventListener('click', () => { if (session) sayCurrent(slowRate()); });
+  $('defBtn').addEventListener('click', () => { if (session) speak([{ text: maskedDefText(current()), rate: settings.rate }]); });
+  $('checkBtn').addEventListener('click', () => {
+    if (!norm($('answer').value)) { $('answer').focus(); return; }
+    checkTyped(false);
+  });
+  $('revealBtn').addEventListener('click', () => checkTyped(true));
+  $('answer').addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    if (session.answered) nextWord();
+    else checkTyped(false);
+  });
+  $('nextBtn').addEventListener('click', nextWord);
+  $('showSpellBtn').addEventListener('click', () => {
+    const w = current();
+    $('showSpellBtn').hidden = true;
+    $('result').innerHTML = tilesHTML(Array.from(w.word.normalize('NFC')), null, spelledOut(w.word)) + alsoAccepted(w, w.word);
+    $('oralMark').hidden = false;
+    $('mwLink').href = 'https://www.merriam-webster.com/dictionary/' + encodeURIComponent(w.word);
+    $('mwWrap').hidden = false;
+    $('rightBtn').textContent = 'Spelled it right';
+    $('rightBtn').focus({ preventScroll: true });
+  });
+  $('rightBtn').addEventListener('click', () => { record(current(), true); nextWord(); });
+  $('missBtn').addEventListener('click', () => { record(current(), false); nextWord(); });
+  $('endBtn').addEventListener('click', finish);
+  $('againBtn').addEventListener('click', () => { if (session && session.missed) startSession(shuffle(session.missed.slice()), session.mode); });
+  $('newBtn').addEventListener('click', () => { session = null; initSetup(); show('setupView'); });
+
+  /* ---------- Word list (parent view) ---------- */
+  let byKey = new Map();
+  function renderList() {
+    if (!list) return;
+    byKey = new Map(list.words.map((w) => [keyOf(w), w]));
+    const q = norm($('filter').value);
+    const rows = list.words.filter((w) => !q || norm(w.word).includes(q) || String(w.n) === q);
+    $('listCount').textContent = rows.length === list.words.length ? list.words.length + ' words' : rows.length + ' of ' + list.words.length + ' words';
+    $('wordRows').innerHTML = rows.map((w) => {
+      const k = keyOf(w);
+      const p = progress[k];
+      const stat = p ? p.c + ' of ' + p.a + ' right' + (p.last === false ? ', missed last time' : '') : 'Not tried yet';
+      const alts = (w.alts && w.alts.length) ? ' or ' + w.alts.map(esc).join(', ') : '';
+      return '<div class="wrow">' +
+        '<span class="wn">#' + w.n + '</span>' +
+        '<div class="wword"><strong>' + esc(w.word) + '</strong>' + alts + '<span class="wmeta">' + esc(w.pos) + '. ' + esc(stat) + '</span></div>' +
+        '<button type="button" class="btn" data-play="' + esc(k) + '" aria-label="Play ' + esc(w.word) + '">' +
+          '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play</button>' +
+        '<input type="text" data-say="' + esc(k) + '" value="' + esc(sayAs[k] || '') + '" placeholder="' + esc(w.say ? 'Said as “' + w.say + '”' : 'Say it as…') + '" aria-label="How to say ' + esc(w.word) + '" autocomplete="off" spellcheck="false">' +
+      '</div>';
+    }).join('');
+  }
+  $('filter').addEventListener('input', renderList);
+  $('wordRows').addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-play]');
+    if (!b) return;
+    const w = byKey.get(b.dataset.play);
+    if (w) speak([{ text: spokenForm(w), rate: settings.rate }]);
+  });
+  $('wordRows').addEventListener('input', (e) => {
+    const inp = e.target.closest('input[data-say]');
+    if (!inp) return;
+    const v = inp.value.trim();
+    if (v) sayAs[inp.dataset.say] = v; else delete sayAs[inp.dataset.say];
+    store(KEYS.say, sayAs);
+  });
+  $('wordRows').addEventListener('keydown', (e) => {
+    const inp = e.target.closest('input[data-say]');
+    if (!inp || e.key !== 'Enter') return;
+    e.preventDefault();
+    const w = byKey.get(inp.dataset.say);
+    if (w) speak([{ text: spokenForm(w), rate: settings.rate }]);
+  });
+
+  /* ---------- Settings ---------- */
+  function fillVoiceSelect() {
+    const sel = $('voiceSel');
+    const auto = bestVoice();
+    sel.innerHTML = '<option value="">Automatic' + (auto ? ' (' + esc(auto.name) + ')' : '') + '</option>' +
+      voices.map((v) => '<option value="' + esc(v.voiceURI) + '">' + esc(v.name) + ' (' + esc(v.lang) + ')</option>').join('');
+    sel.value = voices.some((v) => v.voiceURI === settings.voice) ? settings.voice : '';
+  }
+  function initSettings() {
+    if (canSpeak) refreshVoices();
+    $('voiceSel').disabled = !canSpeak;
+    $('rate').value = settings.rate;
+    $('rateOut').textContent = '(' + Number(settings.rate).toFixed(2) + '×)';
+    $('slowRate').value = settings.slow;
+    $('slowOut').textContent = '(' + Number(settings.slow).toFixed(2) + '×)';
+    $('readDef').checked = !!settings.readDef;
+    $('settingsMsg').textContent = '';
+    $('listInfo').textContent = list ? list.title + ', ' + list.words.length + ' words.' : 'No word list loaded on this device.';
+    $('removeList').hidden = !list;
+  }
+  $('voiceSel').addEventListener('change', () => {
+    settings.voice = $('voiceSel').value; saveSettings();
+    slowWarned = false; $('slowHint').hidden = true;
+    for (const k in timings) delete timings[k];
+  });
+  $('rate').addEventListener('input', () => {
+    settings.rate = parseFloat($('rate').value);
+    $('rateOut').textContent = '(' + settings.rate.toFixed(2) + '×)';
+    saveSettings();
+  });
+  $('slowRate').addEventListener('input', () => {
+    settings.slow = parseFloat($('slowRate').value);
+    $('slowOut').textContent = '(' + settings.slow.toFixed(2) + '×)';
+    saveSettings();
+    slowWarned = false; $('slowHint').hidden = true;
+  });
+  $('testSlow').addEventListener('click', () => speak([
+    { text: 'Normal.', rate: settings.rate },
+    { text: 'butterflies', rate: settings.rate },
+    { text: 'Slow.', rate: settings.rate },
+    { text: 'butterflies', rate: slowRate() }
+  ]));
+  $('readDef').addEventListener('change', () => { settings.readDef = $('readDef').checked; saveSettings(); });
+  $('testVoice').addEventListener('click', () => speak([{ text: 'This is how your spelling words will sound.', rate: settings.rate }]));
+  $('removeList').addEventListener('click', () => {
+    if (!confirm('Remove the word list from this device? You can load it again any time.')) return;
+    forget(KEYS.words);
+    list = null; session = null;
+    show('loadView');
+  });
+  $('clearProgress').addEventListener('click', () => {
+    if (!confirm('Clear all practice history on this device?')) return;
+    progress = {};
+    forget(KEYS.progress);
+    $('settingsMsg').className = 'status ok';
+    $('settingsMsg').textContent = 'Practice history cleared.';
+  });
+
+  /* ---------- Start ---------- */
+  if (!canSpeak) {
+    $('noSpeech').hidden = false;
+    ['sayBtn', 'slowBtn', 'defBtn', 'testVoice', 'testSlow'].forEach((id) => { $(id).disabled = true; });
+  } else {
+    refreshVoices();
+    if (typeof speechSynthesis.addEventListener === 'function') speechSynthesis.addEventListener('voiceschanged', refreshVoices);
+    else speechSynthesis.onvoiceschanged = refreshVoices;
+  }
+  if (list) { initSetup(); show('setupView'); } else { show('loadView'); }
+})();
+</script>
+</body>
+</html>
